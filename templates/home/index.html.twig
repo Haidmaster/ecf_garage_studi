@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Accueil
+{% endblock %}
+
+{% block content %}
+	<main>
+		{# START: section hero #}
+
+		<section class="hero hero__bg">
+			<div class="container hero__description">
+				<h1 class="hero__title">Garage V.Parrot</h1>
+				<h2 class="hero__sutitle"></h2>
+				<p class="hero__text">
+					L'automobile au service du client depuis plus de 15 ans.
+				</p>
+				<p
+					class="hero__action">
+					{# <a href="#Services" class="button button-red">En savoir plus</a> #}
+					<a href="#services" class="btn btn-lg btn-secondary">En savoir plus</a>
+				</p>
+			</div>
+		</section>
+
+		{# END: section hero #}
+
+		{# START: section arrivages #}
+
+		{% include "partials/_arrivals.html.twig" %}
+
+		{# END: section arrivages #}
+
+		{# START: section services #}
+			<section class="services" id="services"> <div class="container">
+				<div class="row services__cards">
+					<h2 class="services__title mt-2 mb-2 py-2 text-center">Nos services</h2>
+					<div class="card col-lg-3 col-md-4 col-sm-8">
+						<img class="card__image" src="{{ asset('assets/images/vidange.jpg') }}" alt=""/>
+						<h3 class="card__title">Révision complete</h3>
+						<p class="card__text">
+							Le garage est équipé de matériel diagnostic haut de gamme mis à jour
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															afin de pouvoir interroger vos calculateurs et ainsi faire le
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															meilleur diagnostic possible sur votre véhicule.
+						</p>
+					</div>
+					<div class="card col-lg-3 col-md-4 col-sm-8">
+						<img class="card__image" src="{{ asset('assets/images/repair.jpg') }}" alt=""/>
+						<h3 class="card__title">Mécanique générale</h3>
+
+						<p class="card__text">
+							Le garage est équipé de matériel diagnostic haut de gamme mis à jour
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															afin de pouvoir interroger vos calculateurs et ainsi faire le
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															meilleur diagnostic possible sur votre véhicule.
+						</p>
+					</div>
+					<div class="card col-lg-3 col-md-4 col-sm-8">
+						<img class="card__image" src="{{ asset('assets/images/diag.jpg') }}" alt=""/>
+						<h3 class="card__title">Diagnostics</h3>
+						<p class="card__text">
+							Le garage est équipé de matériel diagnostic haut de gamme mis à jour
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															afin de pouvoir interroger vos calculateurs et ainsi faire le
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															meilleur diagnostic possible sur votre véhicule.
+						</p>
+					</div>
+
+
+				</div>
+			</div>
+		</section>
+		{# END: section services #}
+
+		{# START: section contact #}
+		{% include "partials/_contactForm.html.twig" %}
+		{# END: section contact #}
+
+
+	</main>
+{% endblock %}
