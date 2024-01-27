@@ -20,9 +20,6 @@ class Service
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'services')]
-    private ?image $images = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -48,18 +45,6 @@ class Service
     public function setContent(string $content): static
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getImages(): ?image
-    {
-        return $this->images;
-    }
-
-    public function setImages(?image $images): static
-    {
-        $this->images = $images;
 
         return $this;
     }

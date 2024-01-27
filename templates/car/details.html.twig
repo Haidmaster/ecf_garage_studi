@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Nos véhicules d'occasions
+{% endblock %}
+
+{% block content %}
+
+	<section class="details">
+		<h1 class="details__title">Fiche détaillée</h1>
+
+		<div class="container">
+			<h2>{{car.model.name}}</h2>
+			<p>{{car.options}}</p>
+			<p>Energie:
+				{{car.energy}}
+				- Transmission:
+				{{car.gearbox}}</p>
+			<p>Année:
+				{{car.years}}</p>
+			<p class="card__mileage">Kilométrage:
+				{{car.mileage}}km</p>
+			<p class="card__price">Prix:
+				{{car.price}}€</p>
+		</div>
+	</section>
+
+{% endblock %}

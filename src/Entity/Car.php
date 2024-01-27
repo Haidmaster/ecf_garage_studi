@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CarRepository;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CarRepository;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
@@ -25,23 +26,14 @@ class Car
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $options = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cars')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?model $models = null;
+    #[ORM\Column]
+    private ?int $years = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cars')]
-    private ?gearbox $gearboxes = null;
+    #[ORM\Column(length: 32)]
+    private ?string $gearbox = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cars')]
-    private ?energy $energys = null;
-
-    #[ORM\OneToMany(mappedBy: 'car', targetEntity: image::class)]
-    private Collection $images;
-
-    public function __construct()
-    {
-        $this->images = new ArrayCollection();
-    }
+    #[ORM\Column(length: 32)]
+    private ?string $energy = null;
 
     public function getId(): ?int
     {
@@ -84,68 +76,38 @@ class Car
         return $this;
     }
 
-    public function getModels(): ?model
+    public function getYears(): ?int
     {
-        return $this->models;
+        return $this->years;
     }
 
-    public function setModels(?model $models): static
+    public function setYears(int $years): static
     {
-        $this->models = $models;
+        $this->years = $years;
 
         return $this;
     }
 
-    public function getGearboxes(): ?gearbox
+    public function getGearbox(): ?string
     {
-        return $this->gearboxes;
+        return $this->gearbox;
     }
 
-    public function setGearboxes(?gearbox $gearboxes): static
+    public function setGearbox(string $gearbox): static
     {
-        $this->gearboxes = $gearboxes;
+        $this->gearbox = $gearbox;
 
         return $this;
     }
 
-    public function getEnergys(): ?energy
+    public function getEnergy(): ?string
     {
-        return $this->energys;
+        return $this->energy;
     }
 
-    public function setEnergys(?energy $energys): static
+    public function setEnergy(string $energy): static
     {
-        $this->energys = $energys;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, image>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(image $image): static
-    {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setCar($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(image $image): static
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getCar() === $this) {
-                $image->setCar(null);
-            }
-        }
+        $this->energy = $energy;
 
         return $this;
     }

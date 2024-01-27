@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ModelController!{% endblock %}
+{% block title %}Administration - Liste des modèles
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<h1>Liste des modèles</h1>
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Marque</th>
+					<th scope="col">Modèle</th>
+					<th scope="col"></th>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Haider/Formation/ecf_garage_studi/src/Controller/ModelController.php'|file_link(0) }}">src/Controller/ModelController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Haider/Formation/ecf_garage_studi/templates/model/index.html.twig'|file_link(0) }}">templates/model/index.html.twig</a></code></li>
-    </ul>
-</div>
+				</tr>
+			</thead>
+			<tbody>
+				{% for model in models %}
+					<tr>
+						<th scope="row">{{model.id}}</th>
+						<td>{{model.brand.name}}</td>
+						<td>{{model.name}}</td>
+						<td>
+
+							<a href="{{path('model_edit', {'id': model.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+							<a href="{{path('model_delete', {'id': model.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{path('model_create')}}" class="btn btn-primary">Ajouter un modèle</a>
+	</div>
 {% endblock %}

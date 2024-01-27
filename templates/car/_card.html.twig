@@ -1,0 +1,23 @@
+<div class="annonces__card">
+	<div class="card__image"></div>
+	<div class="card__body">
+		<h5 class="card__title">
+			{{car.model.name}}
+			<div class="card__text">
+				<p>Energie:
+					{{car.energy}}
+					- Transmission:
+					{{car.gearbox}}</p>
+				<p>Année:
+					{{car.years}}</p>
+				<p class="card__mileage">Kilométrage:
+					{{car.mileage}}km</p>
+				<p class="card__price">Prix:
+					{{car.price}}€</p>
+				<a href="{{path('car_show', {'id': car.id})}}" class="btn btn-primary btn-sm">détails</a>
+				<a href="{{path('car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+				<a href="{{path('car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+			</div>
+		</div>
+	</div>
+</div

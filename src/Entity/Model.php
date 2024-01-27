@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ModelRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Car;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ModelRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[UniqueEntity('name', message: "Ce modèle existe déjà")]
 #[ORM\Entity(repositoryClass: ModelRepository::class)]
 class Model
 {
@@ -16,18 +18,24 @@ class Model
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]
+    #[Assert\NotBlank(message: "Veuillez saisir un modèle")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "La marque doit contenir au minimum {{ limit }} caractères",
+        max: 32,
+        maxMessage: "La marque ne peut pas dépasser {{ limit }} caractères"
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s-]+$/',
+        message: 'Le modèle ne peut contenir que des lettres et des chiffres'
+    )]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'models')]
     private ?Brand $brand = null;
 
-    #[ORM\OneToMany(mappedBy: 'models', targetEntity: Car::class)]
-    private Collection $cars;
-
-    public function __construct()
-    {
-        $this->cars = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'models')]
+    private ?Car $car = null;
 
     public function getId(): ?int
     {
@@ -58,32 +66,14 @@ class Model
         return $this;
     }
 
-    /**
-     * @return Collection<int, Car>
-     */
-    public function getCars(): Collection
+    public function getCar(): ?Car
     {
-        return $this->cars;
+        return $this->car;
     }
 
-    public function addCar(Car $car): static
+    public function setCar(?Car $car): static
     {
-        if (!$this->cars->contains($car)) {
-            $this->cars->add($car);
-            $car->setModels($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCar(Car $car): static
-    {
-        if ($this->cars->removeElement($car)) {
-            // set the owning side to null (unless already changed)
-            if ($car->getModels() === $this) {
-                $car->setModels(null);
-            }
-        }
+        $this->car = $car;
 
         return $this;
     }
