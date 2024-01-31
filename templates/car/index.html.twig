@@ -6,19 +6,10 @@
 {% block content %}
 	<!--Section: Annonces -->
 	<section class="container annonces">
-		<h1 class="annonces__title mt-4 py-2">Nos véhicules d'occasion</h1>
-
-		<div class="container">
-			<div class="row">
-				{% for car in cars %}
-					<div class="col-lg-3 col-md-4 col-sm-12">
-						{% include "car/_card.html.twig" %}
-					</div>
-				{% endfor %}
-			</div>
+		<div class="row">
+			<h2 class="annonces__title">Nos véhicules d'occasion</h2>
+			{% include "car/_carCard.html.twig" %}
 		</div>
-
 	</section>
 	<!-- End Section: Annonces -->
-
 {% endblock %}

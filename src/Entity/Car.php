@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CarRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
@@ -24,16 +26,43 @@ class Car
     private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Length(
+        min: 6,
+        minMessage: "La marque doit contenir au minimum {{ limit }} caractères",
+        max: 128,
+        maxMessage: "La marque ne peut pas dépasser {{ limit }} caractères"
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s-]+$/',
+        message: 'La marque ne peut contenir que des lettres et des chiffres'
+    )]
     private ?string $options = null;
 
     #[ORM\Column]
+    #[Assert\Length()]
+    #[Assert\Positive]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s-]+$/',
+        message: 'La marque ne peut contenir que des lettres et des chiffres'
+    )]
     private ?int $years = null;
 
-    #[ORM\Column(length: 32)]
-    private ?string $gearbox = null;
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    private ?Model $model = null;
 
-    #[ORM\Column(length: 32)]
-    private ?string $energy = null;
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    private ?Gearbox $gearbox = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    private ?Energy $energy = null;
+
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class)]
+    private Collection $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -88,26 +117,68 @@ class Car
         return $this;
     }
 
-    public function getGearbox(): ?string
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): static
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    public function getGearbox(): ?Gearbox
     {
         return $this->gearbox;
     }
 
-    public function setGearbox(string $gearbox): static
+    public function setGearbox(?Gearbox $gearbox): static
     {
         $this->gearbox = $gearbox;
 
         return $this;
     }
 
-    public function getEnergy(): ?string
+    public function getEnergy(): ?Energy
     {
         return $this->energy;
     }
 
-    public function setEnergy(string $energy): static
+    public function setEnergy(?Energy $energy): static
     {
         $this->energy = $energy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getCar() === $this) {
+                $image->setCar(null);
+            }
+        }
 
         return $this;
     }

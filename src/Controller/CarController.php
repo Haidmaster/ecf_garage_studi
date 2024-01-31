@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Car;
+
 use App\Form\CarType;
 use App\Repository\CarRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,17 +13,27 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-
-#[Route('/annonce', name: 'car_', methods: ['GET'])]
+// #[Route('/annonces', name: 'car_', methods: ['GET'])]
 class CarController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(CarRepository $repo): Response
     {
         return $this->render(
-            'car/_card.html.twig',
+            'car/_carCard.html.twig',
             [
-                'car' => $repo->findAll()
+                'cars' => $repo->findAll()
+            ]
+        );
+    }
+    #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(Car $car): Response
+    {
+        return $this->render(
+            'car/details.html.twig',
+            [
+
+                'car' => $car
             ]
         );
     }
@@ -32,7 +43,6 @@ class CarController extends AbstractController
     {
 
         $car = new Car();
-
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
 

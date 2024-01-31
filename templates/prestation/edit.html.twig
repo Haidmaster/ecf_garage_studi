@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Modification d'une prestation
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<h1>Modifier la prestation</h1>
+		{% include "prestation/_form.html.twig" %}
+
+		<a href="{{path('home')}}" class="btn btn-primary">Revenir à la liste</a>
+
+	</div>
+{% endblock %}

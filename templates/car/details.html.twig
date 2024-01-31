@@ -7,12 +7,15 @@
 
 	<section class="details">
 		<h1 class="details__title">Fiche détaillée</h1>
-
 		<div class="container">
-			<h2>{{car.model.name}}</h2>
-			<p>{{car.options}}</p>
+			<h2>{{car.model.brand.name}}
+				-
+				{{car.model.name}}</h2>
+
+			<p>Equipement et options:
+				{{car.options}}</p>
 			<p>Energie:
-				{{car.energy}}
+				{{car.energy.name}}
 				- Transmission:
 				{{car.gearbox}}</p>
 			<p>Année:
@@ -20,7 +23,7 @@
 			<p class="card__mileage">Kilométrage:
 				{{car.mileage}}km</p>
 			<p class="card__price">Prix:
-				{{car.price}}€</p>
+				{{ car.price | number_format(0, ',', ' ') }}€</p>
 		</div>
 	</section>
 

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Brand;
 use App\Form\BrandType;
 use App\Repository\BrandRepository;
@@ -10,8 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-
 
 #[Route('/marque', name: 'brand_', methods: ['GET'])]
 class BrandController extends AbstractController

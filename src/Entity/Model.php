@@ -34,9 +34,6 @@ class Model
     #[ORM\ManyToOne(inversedBy: 'models')]
     private ?Brand $brand = null;
 
-    #[ORM\ManyToOne(inversedBy: 'models')]
-    private ?Car $car = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -62,18 +59,6 @@ class Model
     public function setBrand(?Brand $brand): static
     {
         $this->brand = $brand;
-
-        return $this;
-    }
-
-    public function getCar(): ?Car
-    {
-        return $this->car;
-    }
-
-    public function setCar(?Car $car): static
-    {
-        $this->car = $car;
 
         return $this;
     }

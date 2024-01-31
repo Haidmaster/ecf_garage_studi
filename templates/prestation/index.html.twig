@@ -1,0 +1,9 @@
+{% for prestation in prestations %}
+	<div class="card col-lg-3 col-md-4 col-sm-8">
+		<img class="card__image" src="{{ asset('assets/images/vidange.jpg') }}" alt=""/>
+		<h3 class="card__title">{{prestation.name}}</h3>
+		<p class="card__text">{{prestation.content}}</p>
+		<a href="{{path('prestation_edit', {'id': prestation.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+		<a href="{{path('prestation_delete', {'id': prestation.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+	</div>
+{% endfor %}

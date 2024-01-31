@@ -1,9 +1,14 @@
 {{ form_start(formCar, {attr: {'novalidate' : 'novalidate'}}) }}
-{{form_row(formCar.models)}}
-{{form_row(formCar.years)}}
-{{form_row(formCar.price)}}
-{{form_row(formCar.mileage)}}
-{{form_row(formCar.gearbox)}}
+{% for model in formCar.model %}
+	{{form_row(model.brand)}}
+	{{form_row(model.name)}}
+{% endfor %}
 {{form_row(formCar.energy)}}
-<button class="btn btn-success" type="submit">Valider</button>
+{# {{form_row(formCar.gearbox)}} #}
+{{form_row(formCar.years)}}
+{{form_row(formCar.options)}}
+{{form_row(formCar.mileage)}}
+{{form_row(formCar.price)}}
+
+<button class="btn btn-success mb-1" type="submit">Valider</button>
 {{ form_end(formCar) }}
