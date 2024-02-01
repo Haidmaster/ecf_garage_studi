@@ -20,7 +20,7 @@ class Prestation
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'prestation', cascade: ['persist', 'remove'])]
     private ?Image $image = null;
 
     public function getId(): ?int

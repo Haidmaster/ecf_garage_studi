@@ -26,8 +26,10 @@
 		<section class="annonces" id="{{path('car_index')}}">
 			<div class="container">
 				<div class="row annonces__cards">
-					<h2 class="annonces__title">Nos nouveaux véhicules en stock</h2>
-					{# {% include "car/_carCard.html.twig" %} #}
+					<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
+					{% for car in cars %}
+						{% include "car/_carCard.html.twig" %}
+					{% endfor %}
 				</div>
 			</div>
 		</section>
@@ -39,15 +41,18 @@
 			<div class="container">
 				<div class="row prestations__cards">
 					<h2 class="prestations__title mt-2 mb-2 py-2 text-center">Nos prestations</h2>
-					{% include "prestation/index.html.twig" %}
+					{% for prestation in prestations %}
+						{% include "prestation/index.html.twig" %}
+					{% endfor %}
 				</div>
-			</section>
-			{# END: section prestations #}
+			</div>
+		</section>
+		{# END: section prestations #}
 
-		{# START: section contact #}
-			{# {% include "partials/_contactForm.html.twig" %} #}
-			{# END: section contact #}
+	{# START: section contact #}
+		{# {% include "partials/_contactForm.html.twig" %} #}
+		{# END: section contact #}
 
 
-		</main>
-	{% endblock %}
+	</main>
+{% endblock %}

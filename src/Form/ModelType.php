@@ -16,7 +16,7 @@ class ModelType extends AbstractType
     {
         $builder
             ->add('brand', EntityType::class, [
-                'label'     => 'Liste',
+                'label'     => 'Marques',
                 'class'         => Brand::class,  // FQCN de l'entité
                 'choice_label'  => 'name', // Attributs de l'entité (ie: colonne de la table)
                 'mapped'        => true, // valeur par défaut
@@ -25,7 +25,7 @@ class ModelType extends AbstractType
                 'multiple'      => false, // valeur par défaut. Choix multiple si true (=> checkbox et bouton radio si false)
             ])
             ->add('name', TextType::class, [
-                'label' => 'Modèle',
+                'label' => 'Modèles',
                 'attr' => [
                     'placeholder' => 'Saisir un modèle'
                 ]

@@ -1,7 +1,7 @@
 {{ form_start(formCar, {attr: {'novalidate' : 'novalidate'}}) }}
 {% for model in formCar.model %}
-	{{form_row(model.brand)}}
-	{{form_row(model.name)}}
+	{{form_row(model.brand.name)}}
+	{{form_row(model)}}
 {% endfor %}
 {{form_row(formCar.energy)}}
 {# {{form_row(formCar.gearbox)}} #}

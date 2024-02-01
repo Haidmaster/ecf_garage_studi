@@ -11,10 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-
+#[Route('/prestation', name: 'prestation_', methods: ['GET'])]
 class PrestationController extends AbstractController
 {
-    #[Route('/', name: 'prestation_', methods: ['GET'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(PrestationRepository $repo): Response
     {
         return $this->render(
@@ -66,6 +66,6 @@ class PrestationController extends AbstractController
     {
 
         $repo->remove($prestation, true);
-        return $this->redirectToRoute('prestation_index');
+        return $this->redirectToRoute('home');
     }
 }

@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Entity\Car;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ModelRepository;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[UniqueEntity('name', message: "Ce modèle existe déjà")]
 #[ORM\Entity(repositoryClass: ModelRepository::class)]
@@ -34,6 +36,43 @@ class Model
     #[ORM\ManyToOne(inversedBy: 'models')]
     private ?Brand $brand = null;
 
+    #[ORM\OneToMany(mappedBy: 'model', targetEntity: Car::class, cascade: ['persist'])]
+    private Collection $cars;
+
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, Car>
+     */
+    public function getCars(): Collection
+    {
+        return $this->cars;
+    }
+
+    public function addCar(Car $car): self
+    {
+        if (!$this->cars->contains($car)) {
+            $this->cars->add($car);
+            $car->setModel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCar(Car $car): self
+    {
+        if ($this->cars->removeElement($car)) {
+            // set the owning side to null (unless already changed)
+            if ($car->getModel() === $this) {
+                $car->setModel(null);
+            }
+        }
+
+        return $this;
+    }
     public function getId(): ?int
     {
         return $this->id;

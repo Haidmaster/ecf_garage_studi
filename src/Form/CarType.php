@@ -27,21 +27,25 @@ class CarType extends AbstractType
     {
 
         $builder
+            // ->add('cars', CollectionType::class, [
+            //     'entry_type' => ModelType::class,
+            //     'entry_options' => ['label' => 'name'],
+            // ])
+            // ->add('brand', EntityType::class, [
+            //     'label' => 'Marque',
+            //     'class'         => Brand::class,  // FQCN de l'entité
+            //     'choice_label'  => 'name', // Attributs de l'entité (ie: colonne de la table)
+            //     'mapped'        => false, // valeur par défaut
+            //     'placeholder'   => 'Choisir la marque',
+            // ])
+
             ->add('model', EntityType::class, [
-                'label'     => 'Marque',
-                'class'         => Brand::class,  // FQCN de l'entité
-                'choice_label'  => 'name', // Attributs de l'entité (ie: colonne de la table)
-                'mapped'        => false, // valeur par défaut
-                'placeholder'   => 'Choisir la marque',
-                'multiple'      => false, //
-                'label'     => 'Modèle',
+                'label' => 'Modèle',
                 'class'         => Model::class,  // FQCN de l'entité
                 'choice_label'  => 'name', // Attributs de l'entité (ie: colonne de la table)
                 'mapped'        => true, // valeur par défaut
                 'placeholder'   => 'Choisir un modèle',
-                'multiple'      => false, // valeur par défaut. Choix multiple si true (=> checkbox et bouton radio si false)
-            ]);
-        $builder
+            ])
             ->add('energy', EntityType::class, [
                 'label'     => 'Carburant',
                 'class'         => Energy::class,

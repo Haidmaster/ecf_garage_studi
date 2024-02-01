@@ -8,7 +8,10 @@
 	<section class="container annonces">
 		<div class="row">
 			<h2 class="annonces__title">Nos véhicules d'occasion</h2>
-			{% include "car/_carCard.html.twig" %}
+			{% for car in cars %}
+				{% include "car/_carCard.html.twig" %}
+			{% endfor %}
+
 		</div>
 	</section>
 	<!-- End Section: Annonces -->

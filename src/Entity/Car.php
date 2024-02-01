@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CarRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
@@ -27,14 +26,14 @@ class Car
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\Length(
-        min: 6,
-        minMessage: "La marque doit contenir au minimum {{ limit }} caractères",
+        min: 12,
+        minMessage: "Le contenu doit contenir au moins {{ limit }} caractères",
         max: 128,
-        maxMessage: "La marque ne peut pas dépasser {{ limit }} caractères"
+        maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
     )]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z\s-]+$/',
-        message: 'La marque ne peut contenir que des lettres et des chiffres'
+        message: 'Seuls les chiffres et les lettres sont autorisés'
     )]
     private ?string $options = null;
 
@@ -48,6 +47,7 @@ class Car
     private ?int $years = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Model $model = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
@@ -117,17 +117,6 @@ class Car
         return $this;
     }
 
-    public function getModel(): ?Model
-    {
-        return $this->model;
-    }
-
-    public function setModel(?Model $model): static
-    {
-        $this->model = $model;
-
-        return $this;
-    }
 
     public function getGearbox(): ?Gearbox
     {
@@ -149,6 +138,18 @@ class Car
     public function setEnergy(?Energy $energy): static
     {
         $this->energy = $energy;
+
+        return $this;
+    }
+
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): static
+    {
+        $this->model = $model;
 
         return $this;
     }

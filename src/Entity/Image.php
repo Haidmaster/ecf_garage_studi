@@ -2,9 +2,8 @@
 
 namespace App\Entity;
 
-
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -14,11 +13,14 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Car $car = null;
+
+    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
+    private ?Prestation $prestation = null;
 
     public function getId(): ?int
     {
@@ -30,7 +32,7 @@ class Image
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -45,6 +47,28 @@ class Image
     public function setCar(?Car $car): static
     {
         $this->car = $car;
+
+        return $this;
+    }
+
+    public function getPrestation(): ?Prestation
+    {
+        return $this->prestation;
+    }
+
+    public function setPrestation(?Prestation $prestation): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($prestation === null && $this->prestation !== null) {
+            $this->prestation->setImage(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($prestation !== null && $prestation->getImage() !== $this) {
+            $prestation->setImage($this);
+        }
+
+        $this->prestation = $prestation;
 
         return $this;
     }

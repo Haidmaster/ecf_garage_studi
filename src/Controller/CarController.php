@@ -13,20 +13,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-// #[Route('/annonces', name: 'car_', methods: ['GET'])]
+#[Route('/annonce', name: 'car_', methods: ['GET'])]
 class CarController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(CarRepository $repo): Response
     {
         return $this->render(
-            'car/_carCard.html.twig',
+            'car/index.html.twig',
             [
                 'cars' => $repo->findAll()
             ]
         );
     }
-    #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/annonce/{id}', name: 'show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Car $car): Response
     {
         return $this->render(
