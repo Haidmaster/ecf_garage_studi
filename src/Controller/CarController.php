@@ -5,7 +5,9 @@ namespace App\Controller;
 
 use App\Entity\Car;
 
+use App\Entity\Image;
 use App\Form\CarType;
+use App\Service\PictureService;
 use App\Repository\CarRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,14 +41,35 @@ class CarController extends AbstractController
     }
 
     #[Route('/creation', name: 'create', methods: ['GET', 'POST'])]
-    public function add(Request $request, CarRepository $repo): Response
+    public function add(Request $request, CarRepository $repo,  PictureService $pictureService): Response
     {
 
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
+
+        // On recupère la requete du formulaire
         $form->handleRequest($request);
 
+        // On vérifie si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // On récupère les images
+            $images = $form->get('images')->getData();
+
+            // On boucle $image qui est un tableau
+            foreach ($images as $image) {
+                // On définit le dossier de destination
+                $folder = 'car';
+
+                // On appelle le service d'ajout
+                $fichier = $pictureService->add($image, $folder, 300, 300);
+
+                $img = new Image();
+                $img->setName($fichier);
+                $car->addImage($img);
+            }
+
+            $car = $form->getData();
             $repo->save($car, true);
             $this->addFlash('succes', 'L\'annonce a bien été ajoutée.');
             return $this->redirectToRoute('car_index');

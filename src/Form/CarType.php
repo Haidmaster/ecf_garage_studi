@@ -3,23 +3,18 @@
 namespace App\Form;
 
 use App\Entity\Car;
-use App\Entity\Brand;
 use App\Entity\Model;
 use App\Entity\Energy;
 use App\Entity\Gearbox;
-use App\Form\BrandType;
-use App\Form\ModelType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
 
 class CarType extends AbstractType
 {
@@ -27,24 +22,12 @@ class CarType extends AbstractType
     {
 
         $builder
-            // ->add('cars', CollectionType::class, [
-            //     'entry_type' => ModelType::class,
-            //     'entry_options' => ['label' => 'name'],
-            // ])
-            // ->add('brand', EntityType::class, [
-            //     'label' => 'Marque',
-            //     'class'         => Brand::class,  // FQCN de l'entité
-            //     'choice_label'  => 'name', // Attributs de l'entité (ie: colonne de la table)
-            //     'mapped'        => false, // valeur par défaut
-            //     'placeholder'   => 'Choisir la marque',
-            // ])
-
             ->add('model', EntityType::class, [
                 'label' => 'Modèle',
-                'class'         => Model::class,  // FQCN de l'entité
-                'choice_label'  => 'name', // Attributs de l'entité (ie: colonne de la table)
-                'mapped'        => true, // valeur par défaut
+                'class'         => Model::class,
+                'choice_label'  => 'name',
                 'placeholder'   => 'Choisir un modèle',
+
             ])
             ->add('energy', EntityType::class, [
                 'label'     => 'Carburant',
@@ -74,22 +57,44 @@ class CarType extends AbstractType
             ])
             ->add('options', TextareaType::class, [
                 'label' => 'Equipements et options',
-                'attr' => ['placeholder' => '(Ouverture sans clé,feux xenons,etc..)']
+                'attr' => ['placeholder' => '(Caméra de recule,ouverture sans clés,etc..)']
 
             ])
             ->add('years', IntegerType::class, [
                 'label' => 'Année du véhicule',
+            ])
+
+            ->add('images', FileType::class, [
+                'label' => 'Photos',
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
             ]);
 
-        // ->add('image', FileType)
+        // ->add('image', FileType::class, [
+        //     'label' => 'Photos',
+        //     'multiple' => true,
+        //     'mapped' => false,
+        //     'required' => false,
+        //     'constraints' => [
+        //         new File([
+        //             'maxSize' => '1024k',
+        //             'mimeTypes' => [
+        //                 'image/png',
+        //                 'image/jpeg',
+        //                 'image/jpg',
+        //                 'image/gif',
+        //             ],
+        //             'mimeTypesMessage' => 'Merci de télécharger une image valide'
+        //         ])
+        //     ]
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Car::class,
-            ModelType::class,
-            BrandType::class
 
         ]);
     }

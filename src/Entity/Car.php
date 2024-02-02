@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
+use App\Entity\Image;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CarRepository;
@@ -28,21 +28,26 @@ class Car
     #[Assert\Length(
         min: 12,
         minMessage: "Le contenu doit contenir au moins {{ limit }} caractères",
-        max: 128,
+        max: 256,
         maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
     )]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z\s-]+$/',
-        message: 'Seuls les chiffres et les lettres sont autorisés'
-    )]
+    // #[Assert\Regex(
+    //     pattern: '/^[a-zA-Z\s-]+$/',
+    //     message: 'Seuls les les lettres sont autorisés'
+    // )]
     private ?string $options = null;
 
     #[ORM\Column]
-    #[Assert\Length()]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Le contenu doit faire au moins {{ limit }} caractères",
+        max: 4,
+        maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
+    )]
     #[Assert\Positive]
     #[Assert\Regex(
-        pattern: '/^[a-zA-Z\s-]+$/',
-        message: 'La marque ne peut contenir que des lettres et des chiffres'
+        pattern: '/^[0-9]+$/',
+        message: 'L\'année ne peut contenir qu\'un chiffre'
     )]
     private ?int $years = null;
 
@@ -56,8 +61,9 @@ class Car
     #[ORM\ManyToOne(inversedBy: 'cars')]
     private ?Energy $energy = null;
 
-    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
+
 
     public function __construct()
     {

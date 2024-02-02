@@ -31,8 +31,6 @@ html {
 body {
   overflow-x: hidden !important;
   font-family: "Roboto", sans-serif;
-  height: 100vh;
-  width: 100%;
   background-color: var(--color-light-grey) !important;
   color: var(--color-dark-grey) !important;
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
@@ -194,6 +192,8 @@ MAIN
 }
 
 /* section prestation */
+
+annonces__cards
 /* section annonces */
 
 .annonces__title {

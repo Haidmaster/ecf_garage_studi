@@ -4,55 +4,54 @@
 {% endblock %}
 
 {% block content %}
-	<main>
-		{# START: section hero #}
-		<section class="hero hero__bg">
-			<div class="container hero__description">
-				<h1 class="hero__title">Garage V.Parrot</h1>
-				<h2 class="hero__sutitle"></h2>
-				<p class="hero__text">
-					L'automobile au service du client depuis plus de 15 ans.
-				</p>
-				<p
-					class="hero__action">
-					{# <a href="#Services" class="button button-red">En savoir plus</a> #}
-					<a href="#prestations" class="btn btn-lg btn-secondary">En savoir plus</a>
-				</p>
+
+	{# START: section hero #}
+	<section class="hero hero__bg">
+		<div class="container hero__description">
+			<h1 class="hero__title">Garage V.Parrot</h1>
+			<h2 class="hero__sutitle"></h2>
+			<p class="hero__text">
+				L'automobile au service du client depuis plus de 15 ans.
+			</p>
+			<p
+				class="hero__action">
+				{# <a href="#Services" class="button button-red">En savoir plus</a> #}
+				<a href="#prestations" class="btn btn-lg btn-secondary">En savoir plus</a>
+			</p>
+		</div>
+	</section>
+	{# END: section hero #}
+
+	{# START: section arrivages #}
+	<section class="annonces" id="{{path('car_index')}}">
+		<div class="container">
+			<div class="row annonces__cards">
+				<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
+				{% for car in cars %}
+					{% include "car/_carCard.html.twig" %}
+				{% endfor %}
 			</div>
-		</section>
-		{# END: section hero #}
+		</div>
+	</section>
 
-		{# START: section arrivages #}
-		<section class="annonces" id="{{path('car_index')}}">
-			<div class="container">
-				<div class="row annonces__cards">
-					<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
-					{% for car in cars %}
-						{% include "car/_carCard.html.twig" %}
-					{% endfor %}
-				</div>
+	{# END: section arrivages #}
+
+	{# START: section prestations #}
+	<section class="prestations" id="prestations">
+		<div class="container">
+			<div class="row prestations__cards">
+				<h2 class="prestations__title mt-2 mb-2 py-2 text-center">Nos prestations</h2>
+				{% for prestation in prestations %}
+					{% include "prestation/index.html.twig" %}
+				{% endfor %}
 			</div>
-		</section>
+		</div>
+	</section>
+	{# END: section prestations #}
 
-		{# END: section arrivages #}
-
-		{# START: section prestations #}
-		<section class="prestations" id="prestations">
-			<div class="container">
-				<div class="row prestations__cards">
-					<h2 class="prestations__title mt-2 mb-2 py-2 text-center">Nos prestations</h2>
-					{% for prestation in prestations %}
-						{% include "prestation/index.html.twig" %}
-					{% endfor %}
-				</div>
-			</div>
-		</section>
-		{# END: section prestations #}
-
-	{# START: section contact #}
-		{# {% include "partials/_contactForm.html.twig" %} #}
-		{# END: section contact #}
+{# START: section contact #}
+	{# {% include "partials/_contactForm.html.twig" %} #}
+	{# END: section contact #}
 
 
-	</main>
 {% endblock %}

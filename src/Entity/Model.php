@@ -36,7 +36,7 @@ class Model
     #[ORM\ManyToOne(inversedBy: 'models')]
     private ?Brand $brand = null;
 
-    #[ORM\OneToMany(mappedBy: 'model', targetEntity: Car::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'model', targetEntity: Car::class)]
     private Collection $cars;
 
     public function __construct()

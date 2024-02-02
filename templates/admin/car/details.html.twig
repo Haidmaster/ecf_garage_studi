@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Nos véhicules d'occasions
+{% endblock %}
+
+{% block content %}
+
+	<section class="details">
+		<h1 class="details__title">Fiche détaillée</h1>
+		<div class="container">
+			<div class="row">
+				<div class="card__image col-md-6">
+					<img src="{{ asset ('assets/uploads/car/-' ~ car.images[0].name )}}" class="img-fluid"/>
+				</div>
+				<div class="details__description col-md-6">
+					<h2>{{car.model.brand.name}}
+						-
+						{{car.model.name}}</h2>
+
+					<p>Equipement et options:
+						{{car.options}}</p>
+					<p>Energie:
+						{{car.energy.name}}
+						- Transmission:
+						{{car.gearbox.name}}</p>
+					<p>Année:
+						{{car.years}}</p>
+					<p class="card__mileage">Kilométrage:
+						{{car.mileage}}km</p>
+					<p class="card__price">Prix:
+						{{ car.price | number_format(0, ',', ' ') }}€</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

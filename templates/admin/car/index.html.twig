@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Nos véhicules d'occasions
+{% endblock %}
+
+{% block content %}
+	<!--Section: Annonces -->
+	<section class="container annonces">
+		<div class="row">
+			<h2 class="annonces__title">Nos véhicules d'occasion</h2>
+			{% for car in cars %}
+				{% include "car/_carCard.html.twig" %}
+			{% endfor %}
+
+		</div>
+	</section>
+	<!-- End Section: Annonces -->
+{% endblock %}
