@@ -19,8 +19,8 @@ class PictureService
     public function add(
         UploadedFile $picture,
         ?string $folder = '',
-        ?int $width = 1280,
-        ?int $height = 800
+        ?int $width = 250,
+        ?int $height = 250
     ) {
         // On donne un nouveau à l'image
         $fichier = md5(uniqid(rand(), true)) . '.webp';
@@ -77,14 +77,6 @@ class PictureService
         imagecopyresampled($resizedPicture, $sourcePicture, 0, 0, $src_x, $src_y, $width, $height, $squareSize, $squareSize);
 
         $path = $this->params->get('images_directory') . $folder;
-
-        // On créer le dossier de destination s'il n'existe pas
-        if (!file_exists($path . '/mini/')) {
-            mkdir($path . '/mini/', 0755, true);
-        }
-
-        // On stock l'image recadrée
-        imagewebp($resizedPicture, $path . '/mini/' . $width . 'x' . $height . '-' . $fichier);
 
         $picture->move($path . '/', $fichier);
 

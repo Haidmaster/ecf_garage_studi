@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Administration
+{% endblock %}
+
+{% block content %}
+
+	<section class="annonces">
+		<div class="container">
+			<h1 class="annonces__title text-start">Espace d'administration</h1>
+
+			<table class="table table-bordered">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">Gestion des annonces</th>
+						<th scope="col">Gestion des utilisateurs</th>
+						<th scope="col">Gestion des prestations</th>
+						<th scope="col">Gestion des Horaires</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>
+							<a href="{{path('car_index')}}">Afficher liste des annonces</a>
+						</td>
+						<td>
+							<a href="{{path('admin_car_create')}}">Ajouter une nouvelle annonce</a>
+						</td>
+						<td>Supprimer une annonce</td>
+					</tr>
+				</tbody>
+			</th>
+		</tr>
+	</tbody>
+</th></tr><tr>
+<th scope="row"></th>
+<td>
+	<a href="{{path('admin_user_index')}}">Afficher la liste des utilisateurs</a>
+</td>
+<td>
+	<a href="#">Créer un nouvel utilisateur</a>
+</td></tr><tr>
+<th scope="row"></th>
+<td>Afficher les prestations</td></tr><tr>
+<th scope="row"></th>
+<td>Afficher la liste des horaires</td></tr></tbody></table></div></section>{% endblock %}

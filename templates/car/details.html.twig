@@ -5,26 +5,62 @@
 
 {% block content %}
 
-	<section class="details">
-		<h1 class="details__title">Fiche détaillée</h1>
-		<div class="container">
-			<h2>{{car.model.brand.name}}
-				-
-				{{car.model.name}}</h2>
+	<section class="details py-2">
+		<h1 class="details__title text-center mt-3">Fiche détaillée</h1>
+		<div class="container-fluid bg-dark text-white p-2">
+			<div class="row g-3 mt-4">
+				{% if app.request.attributes.get('id') is defined and app.request.attributes.get('id') is not null %}
+					{% set variables = {'car_': car, id : app.request.attributes.get('id')} %}
+				{% endif %}
+				<div class="card__image col-md-5 d-flex flex-column bd-highlight mb-3">
+					<div class="p-2 bd-highlight flex-grow-1"><img src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" class="img-fluid"/></div>
+				</div>
+				<div class="details__description col-md-7">
 
-			<p>Equipement et options:
-				{{car.options}}</p>
-			<p>Energie:
-				{{car.energy.name}}
-				- Transmission:
-				{{car.gearbox}}</p>
-			<p>Année:
-				{{car.years}}</p>
-			<p class="card__mileage">Kilométrage:
-				{{car.mileage}}km</p>
-			<p class="card__price">Prix:
-				{{ car.price | number_format(0, ',', ' ') }}€</p>
+					<h2>{{car.model.brand.name}}
+						-
+						<span>{{car.model.name}}</span>
+					</h2>
+
+					<p class="w-100">Equipement et options:
+					</p>
+					<p>{{car.options}}</p>
+					<p>Energie:
+						{{car.energy.name}}</p>
+					<p>Boîte de vitesse:
+						{{car.gearbox.name}}</p>
+					<p>Année:
+						{{car.years}}</p>
+					<p class="card__mileage">Kilométrage:
+						{{car.mileage}}km</p>
+					<p class="card__price">Prix:
+						{{ car.price | number_format(0, ',', ' ') }}€</p>
+					<div class="btn-ads mb-2" id"ads">
+						<a href="{{path('admin_car_edit', {id: car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+						<a href="{{path('admin_car_delete', {id: car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row g-3">
+				<div class="col-md-4 ">
+					<img src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" class="img-fluid"/>
+				</div>
+
+				<div class="col-md-4 ">
+					<img src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" class="img-fluid"/>
+				</div>
+				<div class="col-md-4">
+					<img src="{{ asset ('assets/uploads/car/' ~ car.images[2].name )}}" class="img-fluid"/>
+				</div>
+			</div>
+			<div class="form__content mt-2 w-50">
+				<h3>Véhicule vous interesse ?</h3>
+				<p>Contactez nous:</p>
+			</div>
+			{% include "partials/_contactForm.html.twig" %}
 		</div>
-	</section>
 
+	</section>
 {% endblock %}

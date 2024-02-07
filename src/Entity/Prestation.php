@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\PrestationRepository;
+use App\Entity\Image;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PrestationRepository;
 
 #[ORM\Entity(repositoryClass: PrestationRepository::class)]
 class Prestation

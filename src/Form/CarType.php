@@ -3,18 +3,21 @@
 namespace App\Form;
 
 use App\Entity\Car;
+use App\Entity\Brand;
 use App\Entity\Model;
 use App\Entity\Energy;
 use App\Entity\Gearbox;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
 
 class CarType extends AbstractType
 {
@@ -22,13 +25,20 @@ class CarType extends AbstractType
     {
 
         $builder
-            ->add('model', EntityType::class, [
-                'label' => 'Modèle',
-                'class'         => Model::class,
-                'choice_label'  => 'name',
-                'placeholder'   => 'Choisir un modèle',
-
+            ->add('brand', EntityType::class, [
+                'label' => 'Marque',
+                'class' => Brand::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choisir une marque',
+                'mapped' => false,
             ])
+            ->add('model', ChoiceType::class, [
+                'label' => 'Modèle',
+                'placeholder'   => 'Choisir un modèle',
+                'choices' => [],
+                'mapped' => false,
+            ])
+
             ->add('energy', EntityType::class, [
                 'label'     => 'Carburant',
                 'class'         => Energy::class,
@@ -61,35 +71,34 @@ class CarType extends AbstractType
 
             ])
             ->add('years', IntegerType::class, [
-                'label' => 'Année du véhicule',
+                'label' => 'Année',
+                'attr' => ['placeholder' => 'Saisir l\'année du véhicul']
+
             ])
 
             ->add('images', FileType::class, [
-                'label' => 'Photos',
+                'label' => 'Selectionnez une ou plusieurs photos',
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false
+
             ]);
 
-        // ->add('image', FileType::class, [
-        //     'label' => 'Photos',
-        //     'multiple' => true,
-        //     'mapped' => false,
-        //     'required' => false,
-        //     'constraints' => [
-        //         new File([
-        //             'maxSize' => '1024k',
-        //             'mimeTypes' => [
-        //                 'image/png',
-        //                 'image/jpeg',
-        //                 'image/jpg',
-        //                 'image/gif',
-        //             ],
-        //             'mimeTypesMessage' => 'Merci de télécharger une image valide'
-        //         ])
-        //     ]
-        // ]);
+        $builder->get('brand')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                $form->getParent()->add('model', EntityType::class, [
+                    'label' => 'Modèle',
+                    'class' => Model::class,
+                    'choice_label' => 'name',
+                    'placeholder' => 'Choisir un modèle',
+                    'choices' => $form->getData()->getModels(),
+                ]);
+            }
+        );
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

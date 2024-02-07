@@ -1,27 +1,24 @@
-<div class="card col-md-4 col-sm-8">
-	<img src="{{ asset('assets/images/home-bg.jpg') }}" class="card-img-top" alt="..."/>
-	<div class="card-body">
+<div class="col-md-4">
+	<div class="card rounded ">
+		<div class="card-image">
+			<span class="card-notify-badge">{{car.energy.name}}</span>
+			<span class="card-notify-year">{{car.years}}</span>
 
-		<h5 class="card__title">
-			{{car.model.brand.name}}
-			-
-			{{car.model.name}}</h5>
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item">Carburant:
-				{{car.energy.name}}
-				- 																																																																																											Boite de vitesse:
-				{{car.gearbox.name}}</li>
-			<li class="list-group-item">Kilométrage:
-				{{car.mileage}}
-				km</li>
-			<li class="list-group-item .card__price">{{ car.price | number_format(0, ',', ' ') }}€</li>
-			<li>
-				<a href="{{path('car_show', {'id': car.id})}}" class="btn btn-primary btn-sm">détails</a>
-			</li>
-			<li>
-				<a href="{{path('car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-				<a href="{{path('car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
-			</li>
-		</ul>
+			<img class="img-fluid" src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" alt="Alternate Text"/>
+		</div>
+		<div class="card-image-overlay m-auto">
+			<span class="card-detail-badge">{{car.gearbox.name}}
+			</span>
+			<span class="card-detail-badge">{{ car.price | number_format(0, ',', ' ') }}€</span>
+			<span class="card-detail-badge">{{car.mileage}}
+				km</span>
+		</div>
+		<div class="card-body text-center">
+			<div class="ad-title m-auto">
+				<h5>{{car.model.brand.name}}
+					-
+					{{car.model.name}}</h5>
+			</div>
+			<a class="ad-btn" href="{{path('car_show', {'id': car.id})}}">Plus de détails</a>
+		</div>
 	</div>
-</div>

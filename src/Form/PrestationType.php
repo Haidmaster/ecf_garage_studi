@@ -2,30 +2,34 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
+use App\Form\ImageType;
 use App\Entity\Prestation;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PrestationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('image', FileType::class, [
+                'label' => 'Selectionnez une illustration',
+                'multiple' => false,
+                'mapped' => false,
+                'required' => false
+
+            ])
             ->add('name', TextType::class, [
                 'label' => 'Titre de la prestation',
-                'attr' => ['placeholder' => 'Saisir le titre de la prestation']
+                'attr' =>  ['placeholder' => 'Saisir le titre de la prestation']
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Description'
-            ])
-            ->add('image', EntityType::class, [
-                'class' => Image::class,
-                'choice_label' => 'id',
+                'label' => 'Description',
+                // 'attr' => ['placeholder' => 'Saisir la description']
             ]);
     }
 

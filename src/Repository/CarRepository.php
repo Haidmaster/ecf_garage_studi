@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Car;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,6 +40,73 @@ class CarRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     *  @return Car[]
+     */
+
+    public function findByGearboxes(): array
+    {
+        // $dql = 'SELECT Car FROM App\Entity\Car as gea ORDER BY car.gearbox';
+        $qb = $this->createQueryBuilder('car')
+            ->addOrderBy('car.gearbox', Criteria::ASC);
+
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
+
+    // public function findByMinPrice($min): array
+    // {
+
+    //     return $this->createQueryBuilder('c')
+    //         ->andWhere('c.price = :price')
+    //         ->setParameter('min', $min)
+    //         ->orderBy('price', 'DESC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+    // public function findByMinPrice($min): array
+    // {
+
+    //     return $this->createQueryBuilder('c')
+    //         ->andWhere('c.price = :price')
+    //         ->setParameter('min', $min)
+    //         ->orderBy('price', 'DESC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+    // public function findByMaxPrice($max): array
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->andWhere('c.price = :price')
+    //         ->setParameter('max', $max)
+    //         ->orderBy('price', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    // public function findByOldYears($older): array
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->andWhere('c.years = :years')
+    //         ->setParameter('older', $older)
+    //         ->orderBy('years', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+    // public function findByNewYears($newer): array
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->andWhere('c.years = :years')
+    //         ->setParameter('newer', $newer)
+    //         ->orderBy('years', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
     //    /**
     //     * @return Car[] Returns an array of Car objects

@@ -1,7 +1,37 @@
-<div class="card col-lg-3 col-md-4 col-sm-8">
-	<img class="card__image" src="{{ asset('assets/images/vidange.jpg') }}" alt=""/>
-	<h3 class="card__title">{{prestation.name}}</h3>
-	<p class="card__text">{{prestation.content}}</p>
-	<a href="{{path('prestation_edit', {'id': prestation.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-	<a href="{{path('prestation_delete', {'id': prestation.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+{# <div class="col-lg-4">
+	<img class="img-fluid" src="{{ asset ('assets/uploads/prestation/' ~ prestation.image.name )}}" alt="La photo de la prestation"/>
+
+	<h2 class="fw-normal">{{prestation.name}}</h2>
+	<p class="lead">{{prestation.content}}</p>
+	<p>
+		<a class="ad-btn" href="#">Nous contacter</a>
+		<a href="{{path('admin_prestation_edit', {'id': prestation.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+		<a href="{{path('admin_prestation_delete', {'id': prestation.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+
+	</p>
+</div> #}
+
+<div class="col-lg-4">
+	<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm ">
+		<div class="col p-4 d-flex flex-column position-static">
+			<strong class="d-inline-block mb-2 text-primary-emphasis">V.Parrot</strong>
+			<p>
+				<a href="{{path('admin_prestation_edit', {'id': prestation.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+				<a href="{{path('admin_prestation_delete', {'id': prestation.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+
+			</p>
+			<h3 class="mb-0">{{prestation.name}}</h3>
+			<div class="mb-1 text-body-secondary">Nov 12</div>
+			<p class="card-text mb-auto">{{prestation.content}}</p>
+			<a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+				Nous contacter
+				<svg class="bi">
+					<use xlink:href="#chevron-right"></use>
+				</svg>
+			</a>
+		</div>
+		<div class="col-auto d-none d-lg-block">
+			<img class="img-fluid h-100" src="{{ asset ('assets/uploads/prestation/' ~ prestation.image.name )}}" alt="La photo de la prestation"/>
+		</div>
+	</div>
 </div>

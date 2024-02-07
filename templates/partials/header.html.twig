@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" data-bs-theme="dark">
 	<nav class="navbar navbar-expand-lg bg-transparent">
 		<div class="container">
 			<a class="navbar-brand" href="{{path('home')}}">
@@ -7,7 +7,6 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="fa fa-stream"></i>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav m-auto">
 					<li class="nav-item">
@@ -21,7 +20,7 @@
 					</li>
 				</ul>
 				<span class="nav-item">
-					<a class="nav-link nav-link--pro" href="{{path('model_create')}}">Espace professionel</a>
+					<a class="nav-link nav-link--pro" href="{{ path('app_login') }}">Espace professionel</a>
 				</span>
 			</div>
 		</div>

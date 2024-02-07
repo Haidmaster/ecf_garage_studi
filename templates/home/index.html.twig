@@ -13,11 +13,9 @@
 			<p class="hero__text">
 				L'automobile au service du client depuis plus de 15 ans.
 			</p>
-			<p
-				class="hero__action">
-				{# <a href="#Services" class="button button-red">En savoir plus</a> #}
-				<a href="#prestations" class="btn btn-lg btn-secondary">En savoir plus</a>
-			</p>
+			<div class="hero__action">
+				<a href="#prestations" class="ad-btn w-50 " id="ads">En savoir plus</a>
+			</div>
 		</div>
 	</section>
 	{# END: section hero #}
@@ -25,18 +23,24 @@
 	{# START: section arrivages #}
 	<section class="annonces" id="{{path('car_index')}}">
 		<div class="container">
-			<div class="row annonces__cards">
-				<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
-				{% for car in cars %}
-					{% include "car/_carCard.html.twig" %}
-				{% endfor %}
+			<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
+			<div class="annonces__cards">
+				<div class="row" id="ads">
+					{% for car in cars %}
+						{% include "car/_carCard.html.twig" %}
+					{% endfor %}
+				</div>
+				<div class="mt-2">
+					<a href="{{path('car_index')}}" class="ad-btn w-50 " id="ads">Voir toutes nos annonces</a>
+				</div>
 			</div>
 		</div>
 	</section>
-
 	{# END: section arrivages #}
 
+
 	{# START: section prestations #}
+
 	<section class="prestations" id="prestations">
 		<div class="container">
 			<div class="row prestations__cards">
@@ -46,12 +50,7 @@
 				{% endfor %}
 			</div>
 		</div>
-	</section>
-	{# END: section prestations #}
-
-{# START: section contact #}
+	</section>{# END: section prestations #}{# START: section contact #}
 	{# {% include "partials/_contactForm.html.twig" %} #}
 	{# END: section contact #}
-
-
 {% endblock %}
