@@ -17,7 +17,7 @@ class BrandCrudController extends AbstractController
     public function index(BrandRepository $repo): Response
     {
         return $this->render(
-            'brand/index.html.twig',
+            'admin/car/brand/index.html.twig',
             [
                 'brands' => $repo->findAll()
             ]
@@ -66,6 +66,6 @@ class BrandCrudController extends AbstractController
     {
 
         $repo->remove($brand, true);
-        return $this->redirectToRoute('brand_index');
+        return $this->redirectToRoute('admin_brand_index');
     }
 }

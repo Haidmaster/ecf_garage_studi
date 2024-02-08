@@ -38,7 +38,6 @@ class CarType extends AbstractType
                 'choices' => [],
                 'mapped' => false,
             ])
-
             ->add('energy', EntityType::class, [
                 'label'     => 'Carburant',
                 'class'         => Energy::class,
@@ -104,7 +103,6 @@ class CarType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Car::class,
-
         ]);
     }
 }

@@ -5,16 +5,15 @@
 
 {% block content %}
 	<!--Section: Annonces -->
-	<section class="annonces">
+	<section class="annonces bg-dark text-white">
 		<div class="container">
 			<div class="row">
-				<h2 class="annonces__title text-center">Nos véhicules d'occasion</h2>
+				<h1 class="annonces__title text-center">Nos véhicules d'occasion</h1>
 				<div class="container">
 					<div class="row justify-content-center" id="ads">
 						{% for car in cars %}
 							{% include "car/_carCard.html.twig" %}
 						{% endfor %}
-
 					</div>
 				</div>
 			</div>

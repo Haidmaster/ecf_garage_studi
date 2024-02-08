@@ -23,15 +23,14 @@
 						<th scope="row">{{brand.id}}</th>
 						<td>{{brand.name}}</td>
 						<td>
-							{# <a href="{{path('show', {'id': brand.id})}}" class="btn btn-primary btn-sm">détails</a> #}
-							<a href="{{path('brand_edit', {'id': brand.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-							<a href="{{path('brand_delete', {'id': brand.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+							<a href="{{path('admin_brand_edit', {'id': brand.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+							<a href="{{path('admin_brand_delete', {'id': brand.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 
-		<a href="{{path('brand_create')}}" class="btn btn-primary">Ajouter une marque</a>
+		<a href="{{path('admin_brand_create')}}" class="btn btn-primary">Ajouter une marque</a>
 	</div>
 {% endblock %}

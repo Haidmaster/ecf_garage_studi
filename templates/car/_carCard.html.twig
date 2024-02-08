@@ -1,10 +1,10 @@
-<div class="col-md-4">
+<div class="col-md-4 mt-4">
 	<div class="card rounded ">
 		<div class="card-image">
 			<span class="card-notify-badge">{{car.energy.name}}</span>
 			<span class="card-notify-year">{{car.years}}</span>
 
-			<img class="img-fluid" src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" alt="Alternate Text"/>
+			<img class="img-fluid" src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" alt="Alternate Text"/>
 		</div>
 		<div class="card-image-overlay m-auto">
 			<span class="card-detail-badge">{{car.gearbox.name}}
@@ -22,3 +22,4 @@
 			<a class="ad-btn" href="{{path('car_show', {'id': car.id})}}">Plus de détails</a>
 		</div>
 	</div>
+</div>

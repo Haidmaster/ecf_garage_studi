@@ -55,7 +55,7 @@ class ModelCrudController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repo->save($model, true);
-            return $this->redirectToRoute('model_index');
+            return $this->redirectToRoute('admin_model_index');
         }
 
         return $this->render('admin/car/model/edit.html.twig', [
@@ -68,6 +68,6 @@ class ModelCrudController extends AbstractController
     {
 
         $repo->remove($model, true);
-        return $this->redirectToRoute('model_index');
+        return $this->redirectToRoute('admin_model_index');
     }
 }

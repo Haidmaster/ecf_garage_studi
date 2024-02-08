@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/admin/prestations', name: 'admin_prestation_', methods: ['GET'])]
+#[Route('/admin/prestation', name: 'admin_prestation_', methods: ['GET'])]
 class PrestationCrudController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
@@ -95,10 +95,12 @@ class PrestationCrudController extends AbstractController
     #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
     public function delete(Request $request, prestation $prestation, PrestationRepository $repo): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $prestation->getId(), $request->request->get('_token'))) {
-            $repo->remove($prestation, true);
-        }
+        // if ($this->isCsrfTokenValid('delete' . $prestation->getId(), $request->request->get('_token'))) {
+        //     $repo->remove($prestation, true);
+        // }
 
-        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+        // return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+        $repo->remove($prestation, true);
+        return $this->redirectToRoute('home');
     }
 }

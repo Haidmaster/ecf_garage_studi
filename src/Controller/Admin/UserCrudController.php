@@ -41,6 +41,8 @@ class UserCrudController extends AbstractController
         UserPasswordHasherInterface $hasher,
         EntityManagerInterface $manager
     ): Response {
+        // $security->isGranted('CAN_EDIT', $questionnaire);
+        // $this->denyAccessUnlessGranted('CAN_EDIT', $questionnaire, 'Vous n\'avez pas accès à ce questionnaire');
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);

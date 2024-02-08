@@ -23,14 +23,14 @@
 						<td>{{model.name}}</td>
 						<td>
 
-							<a href="{{path('model_edit', {'id': model.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-							<a href="{{path('model_delete', {'id': model.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+							<a href="{{path('admin_model_edit', {'id': model.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+							<a href="{{path('admin_model_delete', {'id': model.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 
-		<a href="{{path('model_create')}}" class="btn btn-primary">Ajouter un modèle</a>
+		<a href="{{path('admin_model_create')}}" class="btn btn-primary">Ajouter un modèle</a>
 	</div>
 {% endblock %}

@@ -7,7 +7,6 @@ use App\Entity\Brand;
 use App\Entity\Model;
 use App\Entity\Energy;
 use App\Entity\Gearbox;
-use App\Entity\Prestation;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

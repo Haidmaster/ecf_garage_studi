@@ -5,15 +5,15 @@
 
 {% block content %}
 
-	<section class="details py-2">
+	<section class="container-fluid details py-2 bg-dark text-white">
 		<h1 class="details__title text-center mt-3">Fiche détaillée</h1>
-		<div class="container-fluid bg-dark text-white p-2">
+		<div class="container p-2">
 			<div class="row g-3 mt-4">
 				{% if app.request.attributes.get('id') is defined and app.request.attributes.get('id') is not null %}
 					{% set variables = {'car_': car, id : app.request.attributes.get('id')} %}
 				{% endif %}
-				<div class="card__image col-md-5 d-flex flex-column bd-highlight mb-3">
-					<div class="p-2 bd-highlight flex-grow-1"><img src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" class="img-fluid"/></div>
+				<div class="card__image col-md-4 d-flex flex-column bd-highlight mb-3">
+					<div class="p-2 bd-highlight flex-grow-1"><img src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" class="img-fluid"/></div>
 				</div>
 				<div class="details__description col-md-7">
 
@@ -45,22 +45,26 @@
 
 			<div class="row g-3">
 				<div class="col-md-4 ">
-					<img src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" class="img-fluid"/>
+					<img src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" class="img-fluid"/>
 				</div>
 
 				<div class="col-md-4 ">
-					<img src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" class="img-fluid"/>
-				</div>
-				<div class="col-md-4">
 					<img src="{{ asset ('assets/uploads/car/' ~ car.images[2].name )}}" class="img-fluid"/>
 				</div>
+				<div class="col-md-4">
+					<img src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" class="img-fluid"/>
+				</div>
 			</div>
-			<div class="form__content mt-2 w-50">
-				<h3>Véhicule vous interesse ?</h3>
-				<p>Contactez nous:</p>
-			</div>
-			{% include "partials/_contactForm.html.twig" %}
-		</div>
 
+			<div class="row mt-2">
+				<div class="form__content ">
+					<h3>Véhicule vous interesse ?</h3>
+					<p>Contactez nous:</p>
+
+					{% include "partials/_contactForm.html.twig" %}
+				</div>
+			</div>
+
+		</div>
 	</section>
 {% endblock %}

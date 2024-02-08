@@ -19,12 +19,15 @@ class Car
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
     private ?int $mileage = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
     private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Positive]
     #[Assert\Length(
         min: 12,
         minMessage: "Le contenu doit contenir au moins {{ limit }} caractères",

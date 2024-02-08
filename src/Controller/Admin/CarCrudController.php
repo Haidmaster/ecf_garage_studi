@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-#[Route('/admin/annonces', name: 'admin_car_', methods: ['GET'])]
+#[Route('/admin/annonce', name: 'admin_car_', methods: ['GET'])]
 class CarCrudController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
@@ -45,7 +45,7 @@ class CarCrudController extends AbstractController
 
         $car = new Car();
         $form = $this->createForm(CarType::class, $car, [
-            'action' => $this->generateUrl('car_create'),
+            'action' => $this->generateUrl('admin_car_create'),
             'validation_groups' => ['Default', 'create'],
         ]);
 
@@ -87,8 +87,8 @@ class CarCrudController extends AbstractController
     public function edit(Car $car, Request $request, CarRepository $repo, $id): Response
     {
         $form = $this->createForm(CarType::class, $car, [
-            'action' => $this->generateUrl('admin_car_edit'),
-            'validation_groups' => ['Default', 'edit'],
+            'action' => $this->generateUrl('admin_car_edit', array('id' => $id, 'car' => $car)),
+            'validation_groups' => ['default', 'edit'],
         ]);
         $form->handleRequest($request);
 
@@ -105,13 +105,13 @@ class CarCrudController extends AbstractController
     #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
     public function delete(Request $request, Car $car, CarRepository $repo): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $car->getId(), $request->request->get('_token'))) {
-            $repo->remove($car, true);
-        }
+        //     if ($this->isCsrfTokenValid('delete' . $car->getId(), $request->request->get('_token'))) {
+        //         $repo->remove($car, true);
+        //     }
 
-        return $this->redirectToRoute('car_index', [], Response::HTTP_SEE_OTHER);
+        //     return $this->redirectToRoute('car_index', [], Response::HTTP_SEE_OTHER);
+        // }
+        $repo->remove($car, true);
+        return $this->redirectToRoute('car_index');
     }
-    //     $repo->remove($car, true);
-    //     return $this->redirectToRoute('car_index');
-    // }
 }
