@@ -71,7 +71,7 @@ class CarType extends AbstractType
             ])
             ->add('years', IntegerType::class, [
                 'label' => 'Année',
-                'attr' => ['placeholder' => 'Saisir l\'année du véhicul']
+                'attr' => ['placeholder' => 'Saisir l\'année du véhicule']
 
             ])
 

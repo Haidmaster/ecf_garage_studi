@@ -4,13 +4,35 @@
 {% endblock %}
 
 {% block content %}
+	<div class="container">
+		<div class="row mt-4">
+			<div class="container">
+				<div class="col-9">
+					<h1>Accueil administration</h1>
+					<div>
+						{% if app.user %}
+							<p>
+								<i class="fa-solid fa-user"></i>
+								Compte connecté:
+								{{ app.user.userIdentifier }}
+								/
+								<i class="fa-solid fa-right-from-bracket">
+									<a class="" href="{{ path('app_logout') }}"></i>
+									Se déconnecter</a>
+							</p>
+						{% endif %}
+					</div>
 
-	<section class="annonces">
-		<div class="container">
 
-			<h1 class="annonces__title text-start">Espace d'administration</h1>
-			<small>Faire dérouler les menus pour acceder au contenus</small>
-			{% include "partials/_adminnav.html.twig" %}
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %}
+				</div>
+				<small>Cliquez sur la rubrique pour acceder aux différents contenus</small>
+				{% include "partials/_adminNav.html.twig" %}
+			</div>
 		</div>
-	</section>
+	</div>
 {% endblock %}

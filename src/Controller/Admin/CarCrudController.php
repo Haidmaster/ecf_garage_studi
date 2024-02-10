@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Car;
 use App\Entity\Image;
+use App\Entity\Model;
+use App\Entity\Trait\SlugTrait;
 use App\Form\CarType;
 use App\Service\PictureService;
 use App\Repository\CarRepository;
@@ -12,11 +14,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/annonce', name: 'admin_car_', methods: ['GET'])]
 class CarCrudController extends AbstractController
 {
+
+    use SlugTrait;
+
+    public function __construct(private SluggerInterface $slugger)
+    {
+    }
+
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(CarRepository $repo): Response
     {
@@ -40,10 +49,11 @@ class CarCrudController extends AbstractController
     }
 
     #[Route('/creation', name: 'create', methods: ['GET', 'POST'])]
-    public function add(Request $request, CarRepository $repo,  PictureService $pictureService): Response
+    public function create(Request $request, CarRepository $repo, PictureService $pictureService, Model $model, SluggerInterface $slugger): Response
     {
 
         $car = new Car();
+        $car->setSlug($this->slugger->slug($model->getName())->lower());
         $form = $this->createForm(CarType::class, $car, [
             'action' => $this->generateUrl('admin_car_create'),
             'validation_groups' => ['Default', 'create'],

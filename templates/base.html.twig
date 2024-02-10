@@ -37,15 +37,13 @@
 	</head>
 
 	<body>
-		<header>
-			{% block header %}
-				{% include "partials/header.html.twig" %}
-			{% endblock %}
-		</header>
-		<main>
-			{% block content %}{% endblock %}
-		</main>
-		<footer>
+		{% block header %}
+			{% include "partials/header.html.twig" %}
+		{% endblock %}
+
+		{% block content %}{% endblock %}
+
+		<footer class="footer" id="footer">
 			{% block footer %}
 				{% include "partials/footer.html.twig" %}
 			{% endblock %}

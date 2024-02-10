@@ -19,7 +19,7 @@ class PrestationCrudController extends AbstractController
     public function index(PrestationRepository $repo): Response
     {
         return $this->render(
-            'home/index.html.twig',
+            'prestation/index.html.twig',
             [
                 'prestations' => $repo->findAll(),
             ]
@@ -95,12 +95,12 @@ class PrestationCrudController extends AbstractController
     #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
     public function delete(Request $request, prestation $prestation, PrestationRepository $repo): Response
     {
-        // if ($this->isCsrfTokenValid('delete' . $prestation->getId(), $request->request->get('_token'))) {
-        //     $repo->remove($prestation, true);
-        // }
+        if ($this->isCsrfTokenValid('delete' . $prestation->getId(), $request->request->get('_token'))) {
+            $repo->remove($prestation, true);
+        }
 
-        // return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
-        $repo->remove($prestation, true);
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+        // $repo->remove($prestation, true);
+        // return $this->redirectToRoute('home');
     }
 }

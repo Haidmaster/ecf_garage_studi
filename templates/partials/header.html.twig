@@ -1,7 +1,7 @@
 <header class="header" data-bs-theme="dark">
 	<nav class="navbar navbar-expand-lg bg-transparent">
 		<div class="container">
-			<a class="navbar-brand" href="{{path('home')}}">
+			<a class="navbar-brand" href="{{path('app_home')}}">
 				<img src="{{ asset ('assets/images/logo-header.png')}}" class="nav__logo" alt="Logo Garage V.Parrot">
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,18 +10,30 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav m-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#prestations">Nos prestations</a>
+						<a class="nav-link" href="{{path('app_home')}}">Accueil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/#prestations">Nos prestations</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{path('car_index')}}" #>Nos véhicules d'occasion</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="">à propos</a>
+						<a class="nav-link" href="/#footer">à propos</a>
 					</li>
 				</ul>
-				<span class="nav-item">
-					<a class="nav-link nav-link--pro" href="{{ path('admin_index') }}">Espace professionel</a>
-				</span>
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link nav-link--pro" href="{{ path('admin_index') }}">Espace professionel</a>
+					</li>
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link nav-link--pro" href="{{ path('app_logout') }}">Se déconnecter</a>
+						</li>
+					{% endif %}
+
+				</ul>
+
 			</div>
 		</div>
 	</nav>

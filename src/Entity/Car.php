@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
 {
+    use SlugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -36,7 +37,7 @@ class Car
     )]
     // #[Assert\Regex(
     //     pattern: '/^[a-zA-Z\s-]+$/',
-    //     message: 'Seuls les les lettres sont autorisés'
+    //     message: 'Seuls les chiffres et les lettres sont autorisés'
     // )]
     private ?string $options = null;
 
@@ -48,6 +49,13 @@ class Car
         maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
     )]
     #[Assert\Positive]
+    #[Assert\NotBlank(message: 'ce champ ne peut pas être vide')]
+    #[Assert\Length(
+        min: 4,
+        max: 4,
+        minMessage: 'L\'année doit faire au moins {{ limit }} caractères',
+        maxMessage: 'L\' titre ne doit pas faire plus de {{ limit }} caractères'
+    )]
     #[Assert\Regex(
         pattern: '/^[0-9]+$/',
         message: 'L\'année ne peut contenir qu\'un chiffre'
@@ -67,9 +75,6 @@ class Car
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $slug = null;
-
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -79,6 +84,7 @@ class Car
     {
         return $this->id;
     }
+
 
     public function getMileage(): ?int
     {
@@ -191,18 +197,6 @@ class Car
                 $image->setCar(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }

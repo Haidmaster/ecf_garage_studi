@@ -10,11 +10,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/modele', name: 'admin_model_', methods: ['GET'])]
 class ModelCrudController extends AbstractController
 {
+
+    public function __construct(private SluggerInterface $slugger)
+    {
+    }
+
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(ModelRepository $repo): Response
     {
@@ -27,11 +32,11 @@ class ModelCrudController extends AbstractController
     }
 
     #[Route('/creation', name: 'create', methods: ['GET', 'POST'])]
-    public function add(Request $request, ModelRepository $repo): Response
+    public function add(Request $request, ModelRepository $repo, SluggerInterface $slugger): Response
     {
 
         $model = new Model();
-
+        $model->setSlug($this->slugger->slug($model->getName())->lower());
         $form = $this->createForm(ModelType::class, $model);
         $form->handleRequest($request);
 
@@ -64,10 +69,14 @@ class ModelCrudController extends AbstractController
     }
 
     #[Route('/suppression/{id}', name: 'delete', methods: ['GET'], requirements: ['id' => "\d+"],)]
-    public function delete(Model $model, ModelRepository $repo): Response
+    public function delete(Model $model, ModelRepository $repo, Request $request): Response
     {
+        if ($this->isCsrfTokenValid('delete' . $model->getId(), $request->request->get('_token'))) {
+            $repo->remove($model, true);
+        }
 
-        $repo->remove($model, true);
-        return $this->redirectToRoute('admin_model_index');
+        return $this->redirectToRoute('admin_model_index', [], Response::HTTP_SEE_OTHER);
+        // $repo->remove($model, true);
+        // return $this->redirectToRoute('admin_model_index');
     }
 }

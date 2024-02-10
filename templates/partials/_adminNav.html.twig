@@ -1,12 +1,11 @@
 <div class="row ">
 	<ul class="nav nav-tabs justify-content-around">
-
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des utilisateur</a>
 
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{path('admin_user_index')}}">Afficher la liste des utilisateurs</a>
-				<a class="dropdown-item" href="{{path('admin_user_create')}}">Ajouter un nouvel</a>
+				<a class="dropdown-item" href="{{path('admin_user_create')}}">Créer un nouvel utilisateur</a>
 			</div>
 		</li>
 		<li class="nav-item dropdown">
@@ -14,13 +13,15 @@
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{path('admin_car_index')}}">Afficher la liste des annonces</a>
 				<a class="dropdown-item" href="{{path('admin_car_create')}}">Créer une nouvelle annonce</a>
+				<a class="dropdown-item" href="{{path('admin_brand_index')}}">Afficher la liste des marque</a>
+				<a class="dropdown-item" href="{{path('admin_model_create')}}">Créer un nouveau modèle</a>
 			</div>
 		</li>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des prestations</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">Afficher la liste des prestations</a>
-				<a class="dropdown-item" href="#">Ajouter une nouvelle prestation</a>
+				<a class="dropdown-item" href="{{path('admin_prestation_index')}}">Afficher la liste des prestations</a>
+				<a class="dropdown-item" href="{{path('admin_prestation_create')}}">Ajouter une nouvelle prestation</a>
 			</div>
 		</li>
 		<li class="nav-item dropdown">

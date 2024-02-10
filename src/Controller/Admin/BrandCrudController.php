@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/admin/marques', name: 'admin_brand_', methods: ['GET'])]
+#[Route('/admin/marque', name: 'admin_brand_', methods: ['GET'])]
 class BrandCrudController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]

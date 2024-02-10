@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/prestation', name: 'prestation_', methods: ['GET'])]
 class PrestationController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]

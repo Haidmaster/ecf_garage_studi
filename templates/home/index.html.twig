@@ -26,9 +26,7 @@
 			<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
 			<div class="annonces__cards">
 				<div class="row" id="ads">
-					{% for car in cars %}
-						{% include "car/_carCard.html.twig" %}
-					{% endfor %}
+					{% include "car/_carCard.html.twig" %}
 				</div>
 				<div class="mt-2">
 					<a href="{{path('car_index')}}" class="ad-btn w-50 " id="ads">Voir toutes nos annonces</a>
@@ -46,12 +44,15 @@
 		<div class="container">
 			<div class="row prestations__cards">
 				<h2 class="prestations__title mt-2 mb-2 py-2 text-center">Nos prestations</h2>
-				{% for prestation in prestations %}
-					{% include "prestation/index.html.twig" %}
-				{% endfor %}
+				{% include "prestation/index.html.twig" %}
 			</div>
 		</div>
-	</section>{# END: section prestations #}{# START: section contact #}
+	</section>
+
+
+	{# END: section prestations #}
+{# START: section contact #}
 	{# {% include "partials/_contactForm.html.twig" %} #}
 	{# END: section contact #}
+
 {% endblock %}
