@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\OpeningHourRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\OpeningDay;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OpeningHourRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: OpeningHourRepository::class)]
 class OpeningHour
@@ -15,20 +16,17 @@ class OpeningHour
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $openAm = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $closeAm = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $openPm = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $closePm = null;
-
-    #[ORM\Column(length: 50)]
-    private ?string $closed = null;
 
     #[ORM\OneToMany(mappedBy: 'openingHours', targetEntity: OpeningDay::class)]
     private Collection $openingDays;
@@ -37,6 +35,7 @@ class OpeningHour
     {
         $this->openingDays = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -87,18 +86,6 @@ class OpeningHour
     public function setClosePm(string $closePm): static
     {
         $this->closePm = $closePm;
-
-        return $this;
-    }
-
-    public function getClosed(): ?string
-    {
-        return $this->closed;
-    }
-
-    public function setClosed(string $closed): static
-    {
-        $this->closed = $closed;
 
         return $this;
     }

@@ -1,0 +1,22 @@
+<div class="col-md-4">
+	<p>Boite de vitesse:</p>
+	<form class="form-check form-switch" id="filters">
+		{% for gearbox in gearboxs %}
+			<p><input class="form-check-input" type="checkbox" name="gearboxs[]" id="gear{{gearbox.id}}" value="{{gearbox.id}}">
+				<label class="form-check-label" for="gear{{gearbox.id}}">{{gearbox.name}}</label>
+			</p>
+		{% endfor %}
+	</form>
+</div>
+
+{# <div class="col-md-4">
+	<p>Boite de vitesse:</p>
+	<form class="form-check form-switch" id="filters">
+
+		{% for energy in energys %}
+			<p><input class="form-check-input" type="checkbox" name="energys[]" id="en{{energy.id}}" value="{{energy.id}}">
+				<label class="form-check-label" for="en{{energy.id}}">{{energy.name}}</label>
+			</p>
+		{% endfor %}
+	</form>
+</div> #}

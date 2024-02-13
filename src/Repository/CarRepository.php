@@ -44,15 +44,6 @@ class CarRepository extends ServiceEntityRepository
      *  @return Car[]
      */
 
-    public function findByGearboxes(): array
-    {
-        // $dql = 'SELECT Car FROM App\Entity\Car as gea ORDER BY car.gearbox';
-        $qb = $this->createQueryBuilder('car')
-            ->addOrderBy('car.gearbox', Criteria::ASC);
-
-        $query = $qb->getQuery();
-        return $query->getResult();
-    }
 
     // public function findByMinPrice($min): array
     // {
@@ -65,6 +56,7 @@ class CarRepository extends ServiceEntityRepository
     //         ->getQuery()
     //         ->getResult();
     // }
+
     // public function findByMinPrice($min): array
     // {
 

@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\OpeningDay;
+use App\Entity\OpeningHour;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -24,50 +25,6 @@ class OpeningDayFixtures extends Fixture
             $dayEntity->setName($day);
             $manager->persist($dayEntity);
         }
-        /*********  HOURS FIXTURES  *********/
-
-        $openHourAm =
-            [
-                'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'
-            ];
-        $openHourAm =
-            [
-                'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'
-            ];
-        $openHourAm =
-            [
-                'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'
-            ];
-        $openHourAm =
-            [
-                'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'
-            ];
-        $closed =
-            [
-                'Fermé'
-            ];
-
-        foreach ($days as $day) {
-            $dayEntity = new OpeningDay();
-            $dayEntity->setName($day);
-            $manager->persist($dayEntity);
-        }
-        foreach ($days as $day) {
-            $dayEntity = new OpeningDay();
-            $dayEntity->setName($day);
-            $manager->persist($dayEntity);
-        }
-        foreach ($days as $day) {
-            $dayEntity = new OpeningDay();
-            $dayEntity->setName($day);
-            $manager->persist($dayEntity);
-        }
-        foreach ($days as $day) {
-            $dayEntity = new OpeningDay();
-            $dayEntity->setName($day);
-            $manager->persist($dayEntity);
-        }
-
         $manager->flush();
     }
 }

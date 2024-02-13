@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[Route(path: '/admin/utilisateur', name: 'admin_user_')]
+#[Route('/admin/utilisateur', name: 'admin_user_')]
 class UserController extends AbstractController
 {
 
@@ -24,7 +24,7 @@ class UserController extends AbstractController
     /user/{id}/delete       : supprimer un user
 */
 
-    #[Route(path: '/', name: 'index')]
+    #[Route('/', name: 'index')]
     public function index(UserRepository $repo): Response
     {
         return $this->render('admin/user/index.html.twig', [
@@ -36,10 +36,7 @@ class UserController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user, [
-            'action' => $this->generateUrl('admin_user_create'),
-            'validation_groups' => ['Default', 'create'],
-        ]);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
@@ -48,7 +45,7 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Utilisateur créé avec succès');
         }
         return $this->render('admin/user/create.html.twig', [
-            'form' => $form->createView(),
+            'userForm' => $form->createView(),
         ]);
     }
 
@@ -63,7 +60,7 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Utilisateur modifié avec succès');
         }
         return $this->render('admin/user/edit.html.twig', [
-            'form' => $form->createView(),
+            'userForm' => $form->createView(),
         ]);
     }
 
@@ -74,6 +71,6 @@ class UserController extends AbstractController
         $em->remove($user);
         $em->flush();
         $this->addFlash('success', 'Utilisateur supprimé avec succès');
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('admin_user_index');
     }
 }

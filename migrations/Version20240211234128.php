@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240210175045 extends AbstractMigration
+final class Version20240211234128 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,12 @@ final class Version20240210175045 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE model CHANGE slug slug VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE opening_day CHANGE week_day name VARCHAR(50) NOT NULL');
+        $this->addSql('ALTER TABLE opening_hour CHANGE open_am open_am VARCHAR(255) NOT NULL, CHANGE close_am close_am VARCHAR(255) NOT NULL, CHANGE open_pm open_pm VARCHAR(255) NOT NULL, CHANGE close_pm close_pm VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE opening_day CHANGE name week_day VARCHAR(50) NOT NULL');
-        $this->addSql('ALTER TABLE model CHANGE slug slug VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE opening_hour CHANGE open_am open_am VARCHAR(50) NOT NULL, CHANGE close_am close_am VARCHAR(50) NOT NULL, CHANGE open_pm open_pm VARCHAR(50) NOT NULL, CHANGE close_pm close_pm VARCHAR(50) NOT NULL');
     }
 }

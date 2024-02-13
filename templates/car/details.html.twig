@@ -56,11 +56,17 @@
 				</div>
 			</div>
 
-			<div class="row mt-2">
-				<div class="form__content ">
-					<h3>Véhicule vous interesse ?</h3>
-					<p>Contactez nous:</p>
-					{% include "partials/_contactForm.html.twig" %}
+			<div class="row justify-content-center mt-4">
+				<div class="col-md-8">
+					<div class="form__content ">
+						<h3>Cette
+							{{car.model.brand.name}}
+							-
+							{{car.model.name}}
+							vous interesse ?</h3>
+						<h4>Contactez nous:</h4>
+						{% include "partials/_contactForm.html.twig" %}
+					</div>
 				</div>
 			</div>
 

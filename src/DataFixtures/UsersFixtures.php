@@ -18,7 +18,6 @@ class UsersFixtures extends Fixture
     {
 
 
-
         /*********  USERS FIXTURES  *********/
 
         $user = new User();

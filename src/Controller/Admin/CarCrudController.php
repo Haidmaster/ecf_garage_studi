@@ -2,11 +2,8 @@
 
 namespace App\Controller\Admin;
 
-
 use App\Entity\Car;
 use App\Entity\Image;
-use App\Entity\Model;
-use App\Entity\Trait\SlugTrait;
 use App\Form\CarType;
 use App\Service\PictureService;
 use App\Repository\CarRepository;
@@ -14,46 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/annonce', name: 'admin_car_', methods: ['GET'])]
 class CarCrudController extends AbstractController
 {
-
-    use SlugTrait;
-
-    public function __construct(private SluggerInterface $slugger)
-    {
-    }
-
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(CarRepository $repo): Response
-    {
-        return $this->render(
-            'car/index.html.twig',
-            [
-                'cars' => $repo->findAll()
-            ]
-        );
-    }
-    #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show(Car $car): Response
-    {
-        return $this->render(
-            'car/details.html.twig',
-            [
-
-                'car' => $car, 'cars' => $car
-            ]
-        );
-    }
-
     #[Route('/creation', name: 'create', methods: ['GET', 'POST'])]
-    public function create(Request $request, CarRepository $repo, PictureService $pictureService, Model $model, SluggerInterface $slugger): Response
+    public function create(Request $request, CarRepository $repo, PictureService $pictureService): Response
     {
 
         $car = new Car();
-        $car->setSlug($this->slugger->slug($model->getName())->lower());
         $form = $this->createForm(CarType::class, $car, [
             'action' => $this->generateUrl('admin_car_create'),
             'validation_groups' => ['Default', 'create'],
@@ -115,13 +81,12 @@ class CarCrudController extends AbstractController
     #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
     public function delete(Request $request, Car $car, CarRepository $repo): Response
     {
-        //     if ($this->isCsrfTokenValid('delete' . $car->getId(), $request->request->get('_token'))) {
-        //         $repo->remove($car, true);
-        //     }
+        if ($this->isCsrfTokenValid('delete' . $car->getId(), $request->request->get('_token'))) {
+            $repo->remove($car, true);
+        }
 
-        //     return $this->redirectToRoute('car_index', [], Response::HTTP_SEE_OTHER);
-        // }
-        $repo->remove($car, true);
-        return $this->redirectToRoute('car_index');
+        return $this->redirectToRoute('car_index', [], Response::HTTP_SEE_OTHER);
     }
+    // $repo->remove($car, true);
+    // return $this->redirectToRoute('car_index');
 }

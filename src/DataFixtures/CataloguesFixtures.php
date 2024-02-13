@@ -11,14 +11,8 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class CataloguesFixtures extends Fixture
 {
-
-
     public function load(ObjectManager $manager): void
     {
-
-
-
-
 
         /*********  PRESTATIONS FIXTURES  *********/
 
@@ -73,6 +67,8 @@ class CataloguesFixtures extends Fixture
             $energyEntity->setName($energy);
             $manager->persist($energyEntity);
         }
+
+
 
         /*********  GEARBOX FIXTURES  *********/
 

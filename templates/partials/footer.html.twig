@@ -1,10 +1,7 @@
 <div class="container p-4">
-
 	<div class="row mt-4">
-
 		<div class="col-lg-4 col-md-12 mb-4 mb-md-0">
 			<h5 class="text-uppercase mb-4">Garage Automobile V.Parrot</h5>
-
 			<p>
 				Vincent Parrot, fort de ses 15 années d'expérience dans la réparation automobile, a ouvert son propre garage à Toulouse en 2021.
 			</p>
@@ -27,14 +24,14 @@
 			</div>
 		</div>
 
-
 		<div class="col-lg-4 col-md-6 mb-4 mb-md-0">
 			<ul class="fa-ul" style="margin-left: 1.65em;">
 				<li class="mb-3">
 					<span class="fa-li">
 						<i class="fas fa-home"></i>
 					</span>
-					<span class="ms-2">Garage V.Parrot</span>
+					<span class="ms-2">Garage V.Parrot
+					</span>
 				</li>
 				<li class="mb-3">
 					<span class="fa-li">
@@ -56,18 +53,27 @@
 				</li>
 			</ul>
 		</div>
-
-
 		<div class="col-lg-4 col-md-6 mb-4 mb-md-0">
 			<h5 class="text-uppercase mb-4">Nos horaires d'ouverture</h5>
 
 			<table class="table text-center text-dark">
-				<tbody class="font-weight-normal bg-dark">
-					<tr>
-						<td>Lundi:</td>
-						<td>8:45 - 12h</td>
-						<td>14h - 18h</td>
-					</tr>
+				<tbody
+					class="font-weight-normal bg-dark">
+					{# {% for openingHour in openingHours %}
+											<tr>
+												<td>{{openingHour.openingDay}}</td>
+												<td>{{openingHour.openAm}}
+													-
+													{{openingHour.closeAm}}
+												</td>
+												<td>{{openingHour.openPm}}
+													-
+													{{openingHour.closePm}}
+													-
+													<a class="ad-btn" href="{{path('admin_opening_edit', {'id': openingHour.id})}}">Modifier l'horaire</a>
+												</td>
+											</tr>
+										{% endfor %} #}
 					<tr>
 						<td>Mardi:</td>
 						<td>8:45 - 12h</td>
@@ -97,6 +103,7 @@
 						<td>Dimanche:</td>
 						<td>fermé</td>
 					</tr>
+					#}
 
 				</tbody>
 			</table>

@@ -41,15 +41,17 @@ class UserType extends AbstractType
                     'attr' => ['placeholder' => 'Saisir à nouveau votre mot de passe']
                 ]
             ])
-            ->add('roles', CollectionType::class, [
-                'label' => 'Selectionnez le rôle',
-                'entry_type' => ChoiceType::class,
-                'choices' => [
-                    [
-                        'Aministrateur' => 'ROLE_ADMIN',
-                        'Employé' => 'ROLE_EMPLOYEE'
-                    ]
-                ]
+            ->add('roles', ChoiceType::class, [
+                'choices' =>
+                [
+                    'Aministrateur' => 'ROLE_ADMIN',
+                    'Employé' => 'ROLE_EMPLOYEE'
+                ],
+                'mapped'        => false,
+                'placeholder'   => 'Choisir un rôle',
+                'expanded'      => false,
+                'multiple'      => false,
+
             ]);
     }
 

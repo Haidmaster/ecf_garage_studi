@@ -51,7 +51,7 @@ class PrestationCrudController extends AbstractController
             $prestation->setImage($img);
             $repo->save($prestation, true);
             $this->addFlash('succes', 'La prestation a bien été ajoutée.');
-            return $this->redirectToRoute('prestation_index');
+            return $this->redirectToRoute('home/#prestations');
         }
 
         return $this->render('admin/prestation/create.html.twig', [

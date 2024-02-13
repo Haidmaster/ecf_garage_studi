@@ -7,6 +7,8 @@ use App\Entity\Brand;
 use App\Entity\Model;
 use App\Entity\Energy;
 use App\Entity\Gearbox;
+use App\Repository\BrandRepository;
+use App\Repository\ModelRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
@@ -25,18 +27,11 @@ class CarType extends AbstractType
     {
 
         $builder
-            ->add('brand', EntityType::class, [
-                'label' => 'Marque',
-                'class' => Brand::class,
+            ->add('model', EntityType::class, [
+                'class' => Model::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choisir une marque',
-                'mapped' => false,
-            ])
-            ->add('model', ChoiceType::class, [
-                'label' => 'Modèle',
-                'placeholder'   => 'Choisir un modèle',
-                'choices' => [],
-                'mapped' => false,
+                'label' => 'Selectionnez le modèle',
+                'group_by' => 'brand.name',
             ])
             ->add('energy', EntityType::class, [
                 'label'     => 'Carburant',
@@ -54,6 +49,11 @@ class CarType extends AbstractType
                 'placeholder'   => 'Choisir la boite de vitesse',
                 'multiple'      => false,
             ])
+            ->add('years', IntegerType::class, [
+                'label' => 'Année',
+                'attr' => ['placeholder' => 'Saisir l\'année du véhicule']
+
+            ])
             ->add(
                 'mileage',
                 IntegerType::class,
@@ -69,33 +69,13 @@ class CarType extends AbstractType
                 'attr' => ['placeholder' => '(Caméra de recule,ouverture sans clés,etc..)']
 
             ])
-            ->add('years', IntegerType::class, [
-                'label' => 'Année',
-                'attr' => ['placeholder' => 'Saisir l\'année du véhicule']
-
-            ])
 
             ->add('images', FileType::class, [
                 'label' => 'Selectionnez une ou plusieurs photos',
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false
-
             ]);
-
-        $builder->get('brand')->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
-                $form = $event->getForm();
-                $form->getParent()->add('model', EntityType::class, [
-                    'label' => 'Modèle',
-                    'class' => Model::class,
-                    'choice_label' => 'name',
-                    'placeholder' => 'Choisir un modèle',
-                    'choices' => $form->getData()->getModels(),
-                ]);
-            }
-        );
     }
 
 

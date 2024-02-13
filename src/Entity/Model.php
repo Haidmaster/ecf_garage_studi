@@ -15,14 +15,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Model
 {
 
-
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 32, mapping: ['slug' => 'name'])]
+    #[ORM\Column(length: 32)]
     #[Assert\NotBlank(message: "Veuillez saisir un modèle")]
     #[Assert\Length(
         min: 2,
@@ -34,7 +32,6 @@ class Model
         pattern: '/^[a-zA-Z\s-]+$/',
         message: 'Le modèle ne peut contenir que des lettres et des chiffres'
     )]
-
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'models')]
