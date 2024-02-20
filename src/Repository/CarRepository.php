@@ -40,65 +40,104 @@ class CarRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
     /**
      *  @return Car[]
      */
 
+    public function findByBrand(): array
+    {
+        $dql = 'SELECT car FROM App\Entity\Brand as car ORDER BY car.brand';
 
-    // public function findByMinPrice($min): array
-    // {
+        $query = $this->getEntityManager()->createQuery($dql);
 
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.price = :price')
-    //         ->setParameter('min', $min)
-    //         ->orderBy('price', 'DESC')
-    //         ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+        return $query->getResult();
+    }
 
-    // public function findByMinPrice($min): array
-    // {
 
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.price = :price')
-    //         ->setParameter('min', $min)
-    //         ->orderBy('price', 'DESC')
-    //         ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-    // public function findByMaxPrice($max): array
-    // {
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.price = :price')
-    //         ->setParameter('max', $max)
-    //         ->orderBy('price', 'ASC')
-    //         ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    /**
+     *  @return Car[]
+     */
 
-    // public function findByOldYears($older): array
-    // {
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.years = :years')
-    //         ->setParameter('older', $older)
-    //         ->orderBy('years', 'ASC')
-    //         ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-    // public function findByNewYears($newer): array
-    // {
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.years = :years')
-    //         ->setParameter('newer', $newer)
-    //         ->orderBy('years', 'ASC')
-    //         ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    public function findByGearboxes(): array
+    {
+        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.gearbox';
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->getResult();
+    }
+
+    /**
+     *  @return Car[]
+     */
+
+    public function findBynEnergys(): array
+    {
+        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.energy';
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->getResult();
+    }
+
+    /**
+     *  @return Car[]
+     */
+
+    public function findByMinPrice(): array
+    {
+        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.price ASC';
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        dd($query->getSQL());
+
+        return $query->getResult();
+    }
+
+    /**
+     *  @return Car[]
+     */
+
+    public function findByMaxPrice(): array
+    {
+        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.price DESC';
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->getResult();
+    }
+
+
+    /**
+     *  @return Car[]
+     */
+
+    public function findByNewer(): array
+    {
+        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.year DESC';
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->getResult();
+    }
+
+    /**
+     *  @return Car[]
+     */
+
+    public function findByOlder(): array
+    {
+        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.year ASC';
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->getResult();
+    }
+
+
+
+
 
     //    /**
     //     * @return Car[] Returns an array of Car objects

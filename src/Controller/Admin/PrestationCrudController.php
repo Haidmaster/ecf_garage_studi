@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Image;
 use App\Entity\Prestation;
 use App\Form\PrestationType;
+use App\Repository\CarRepository;
 use App\Service\PictureService;
 use App\Repository\PrestationRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,12 +17,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PrestationCrudController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(PrestationRepository $repo): Response
+    public function index(PrestationRepository $prestRepo, CarRepository $carRepo): Response
     {
         return $this->render(
-            'prestation/index.html.twig',
+            'home/index.html.twig',
             [
-                'prestations' => $repo->findAll(),
+                'prestations' => $prestRepo->findAll(),
+                'cars' => $carRepo->findAll(),
             ]
         );
     }

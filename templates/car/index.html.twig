@@ -6,23 +6,24 @@
 {% block content %}
 
 	<!--Section: Annonces -->
-	<section class="annonces bg-dark text-white">
+	<section class="annonces" id="{{path('car_index')}}">
 		<div class="container">
 			<div class="row">
-				<h1 class="annonces__title text-center">Nos véhicules d'occasion</h1>
-				<div class="container">
-					<div class="car_filters">
-
-						<h4>Filtrer les annonces</h4>
-						{% include "car/_carFilters.html.twig" %}
-						<div class="row justify-content-center" id="ads">
-							{% for car in cars %}
-								{% include "car/_carCard.html.twig" %}
-							{% endfor %}
-						</div>
-					</div>
+				<div class="col-md-12 annonces__titles">
+					<h2 class="annonces__title">Nos véhicules d'occasions</h2>
 				</div>
 			</div>
-		</section>
-		<!-- End Section: Annonces -->
-	{% endblock %}
+			<div class="row annonces__cards">
+				{% for car in cars %}
+					{% include "car/_carCard.html.twig" %}
+				{% endfor %}
+
+			</div>
+		</div>
+	</section>
+	<!-- End Section: Annonces -->
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('assets/js/filters.js') }}"></script>
+{% endblock %}

@@ -23,19 +23,19 @@
 	{# START: section arrivages #}
 	<section class="annonces" id="{{path('car_index')}}">
 		<div class="container">
-			<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
-
-			<div class="annonces__cards">
-				<div class="row" id="ads">
-					{% set max = 3 %}
-					{% for car in cars%}
-						{% include "car/_carCard.html.twig" %}
-					{% endfor %}
-
+			<div class="row">
+				<div class="col-md-12 annonces__titles">
+					<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
+					<a href="{{path('car_index')}}">
+						Voir toutes nos annonce
+						<i class="fa fa-angle-right"></i>
+					</a>
 				</div>
-				<div class="mt-2">
-					<a href="{{path('car_index')}}" class="ad-btn w-50 " id="ads">Voir toutes nos annonces</a>
-				</div>
+			</div>
+			<div class="row annonces__cards">
+				{% for car in cars|slice(0,3)%}
+					{% include "car/_carCard.html.twig" %}
+				{% endfor %}
 
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 	<section class="prestations" id="prestations">
 		<div class="container">
 			<div class="row prestations__cards">
-				<h2 class="prestations__title mt-2 mb-2 py-2 text-center">Nos prestations</h2>
+				<h2 class="prestations__title">Nos prestations</h2>
 				{% for prestation in prestations %}
 					{% include "prestation/index.html.twig" %}
 				{% endfor %}
@@ -61,5 +61,4 @@
 {# START: section contact #}
 	{# {% include "partials/_contactForm.html.twig" %} #}
 	{# END: section contact #}
-
 {% endblock %}
