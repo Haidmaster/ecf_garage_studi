@@ -25,10 +25,11 @@
 			{{car.gearbox.name}}
 		</p>
 
-
-		<p>
-			<a href="{{path('admin_car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-			<a href="{{path('admin_car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
-		</p>
+		{% if is_granted('ROLE_EMPLOYEE') %}
+			<p>
+				<a href="{{path('admin_car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+				<a href="{{path('admin_car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+			</p>
+		{% endif %}
 	</div>
 </div>

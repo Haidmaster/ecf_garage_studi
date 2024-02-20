@@ -62,6 +62,20 @@ a {
 .button-orange:hover {
   background-position: left;
 }
+.button-red {
+  background: linear-gradient(
+    90deg,
+    var(--color-black-1),
+    var(--color-red) 50% 100%
+  );
+  background-size: 200% 100%;
+  background-position: right;
+  transition: all 0.5s;
+}
+
+.button-red:hover {
+  background-position: left;
+}
 
 /*
 HEADER  
