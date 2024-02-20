@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EnergyRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Car;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EnergyRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: EnergyRepository::class)]
 class Energy
@@ -15,10 +16,10 @@ class Energy
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 16)]
+    #[ORM\Column(length: 32)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'energys', targetEntity: Car::class)]
+    #[ORM\OneToMany(mappedBy: 'energy', targetEntity: Car::class)]
     private Collection $cars;
 
     public function __construct()
@@ -55,7 +56,7 @@ class Energy
     {
         if (!$this->cars->contains($car)) {
             $this->cars->add($car);
-            $car->setEnergys($this);
+            $car->setEnergy($this);
         }
 
         return $this;
@@ -65,8 +66,8 @@ class Energy
     {
         if ($this->cars->removeElement($car)) {
             // set the owning side to null (unless already changed)
-            if ($car->getEnergys() === $this) {
-                $car->setEnergys(null);
+            if ($car->getEnergy() === $this) {
+                $car->setEnergy(null);
             }
         }
 

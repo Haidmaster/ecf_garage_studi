@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Modification annonce
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<h1>Modifier une annonce</h1>
+		{% include "admin/car/_form.html.twig" %}
+		<a href="{{path('car_index')}}" class="btn btn-primary">Revenir à la liste</a>
+	</div>
+
+{% endblock %}

@@ -18,7 +18,7 @@ class Gearbox
     #[ORM\Column(length: 32)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'gearboxes', targetEntity: Car::class)]
+    #[ORM\OneToMany(mappedBy: 'gearbox', targetEntity: Car::class)]
     private Collection $cars;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Gearbox
     {
         if (!$this->cars->contains($car)) {
             $this->cars->add($car);
-            $car->setGearboxes($this);
+            $car->setGearbox($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Gearbox
     {
         if ($this->cars->removeElement($car)) {
             // set the owning side to null (unless already changed)
-            if ($car->getGearboxes() === $this) {
-                $car->setGearboxes(null);
+            if ($car->getGearbox() === $this) {
+                $car->setGearbox(null);
             }
         }
 

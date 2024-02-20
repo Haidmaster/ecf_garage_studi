@@ -1,0 +1,13 @@
+<div class="col-lg-4">
+	<img class="img-fluid" src="{{ asset ('assets/uploads/prestation/' ~ prestation.image.name )}}" alt="La photo de la prestation"/>
+
+	<h2 class="fw-normal">{{prestation.name}}</h2>
+	<p class="lead">{{prestation.content}}</p>
+	<p>
+		<a class="ad-btn" href="#">Nous contacter</a>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{path('admin_prestation_edit', {'id': prestation.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+			<a href="{{path('admin_prestation_delete', {'id': prestation.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+		{% endif %}
+	</p>
+</div>

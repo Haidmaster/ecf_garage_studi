@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Administration
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row mt-4">
+			<div class="container">
+				<div class="col-9">
+					<h1>Accueil administration</h1>
+					<div>
+						{% if app.user %}
+							<p>
+								<i class="fa-solid fa-user"></i>
+								Compte connecté:
+								{{ app.user.userIdentifier }}
+								/
+								<i class="fa-solid fa-right-from-bracket">
+									<a class="" href="{{ path('app_logout') }}"></i>
+									Se déconnecter</a>
+							</p>
+						{% endif %}
+					</div>
+
+
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %}
+				</div>
+				<small>Cliquez sur la rubrique pour acceder aux différents contenus</small>
+				{% include "partials/_adminNav.html.twig" %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

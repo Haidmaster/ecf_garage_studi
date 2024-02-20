@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Liste des marques
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="row mt-4">
+			<div class="container">
+				<div class="col-9">
+
+					<h1>Liste des marques</h1>
+					<div>
+						{% if app.user %}
+							<p>
+								<i class="fa-solid fa-user"></i>
+								Compte connecté:
+								{{ app.user.userIdentifier }}
+								/
+								<i class="fa-solid fa-right-from-bracket">
+									<a class="" href="{{ path('app_logout') }}"></i>
+									Se déconnecter</a>
+							</p>
+						{% endif %}
+					</div>
+
+
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %}
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nom</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for brand in brands %}
+								<tr>
+
+									<th scope="row">{{brand.id}}</th>
+									<td>{{brand.name}}</td>
+									<td>
+										<a href="{{path('admin_brand_edit', {'id': brand.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+										<a href="{{path('admin_brand_delete', {'id': brand.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+					<a href="{{path('admin_brand_create')}}" class="btn btn-primary">Ajouter une marque</a>
+					<a href="{{path('admin_model_index')}}" class="btn btn-primary">Afficher à la liste des modèles</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

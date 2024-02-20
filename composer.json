@@ -16,6 +16,8 @@
         "symfony/flex": "^2",
         "symfony/form": "6.4.*",
         "symfony/framework-bundle": "6.4.*",
+        "symfony/mime": "6.4.*",
+        "symfony/monolog-bundle": "^3.0",
         "symfony/runtime": "6.4.*",
         "symfony/security-bundle": "6.4.*",
         "symfony/security-csrf": "6.4.*",
@@ -74,6 +76,10 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.52"
+        "doctrine/doctrine-fixtures-bundle": "^3.5",
+        "symfony/debug-bundle": "6.4.*",
+        "symfony/maker-bundle": "^1.52",
+        "symfony/stopwatch": "6.4.*",
+        "symfony/web-profiler-bundle": "6.4.*"
     }
 }

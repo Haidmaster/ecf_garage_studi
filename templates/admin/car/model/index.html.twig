@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des modèles
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<div class="row mt-4">
+
+			<div class=" col-9">
+				<h1>Liste des modèles</h1>
+				<div>
+					{% if app.user %}
+						<p>
+							<i class="fa-solid fa-user"></i>
+							Compte connecté:
+							{{ app.user.userIdentifier }}
+							/
+							<i class="fa-solid fa-right-from-bracket">
+								<a class="" href="{{ path('app_logout') }}"></i>
+								Se déconnecter</a>
+						</p>
+					{% endif %}
+				</div>
+
+
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success">
+						{{ message }}
+					</div>
+				{% endfor %}
+				<h4>
+					<a href="{{path ('admin_model_create')}}" class="nav-link px-0">
+						<i class="fa-solid fa-plus"></i>
+						<span class="d-none d-sm-inline">Créer un nouveau modèle</span>
+					</a>
+				</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Marque</th>
+							<th scope="col">Modèle</th>
+							<th scope="col"></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						{% for model in models %}
+							<tr>
+								<th scope="row">{{model.id}}</th>
+								<td>{{model.brand.name}}</td>
+								<td>{{model.name}}</td>
+								<td>
+
+									<a href="{{path('admin_model_edit', {'id': model.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+									<a href="{{path('admin_model_delete', {'id': model.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+
+			</div>
+
+		</div>
+
+	</div>
+{% endblock %}

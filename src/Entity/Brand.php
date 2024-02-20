@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\BrandRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Model;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BrandRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[UniqueEntity('name', message: "Cette marque existe déjà")]
 #[ORM\Entity(repositoryClass: BrandRepository::class)]
 class Brand
 {
@@ -16,9 +20,20 @@ class Brand
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]
+    #[Assert\NotBlank(message: "Veuillez saisir une marque")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "La marque doit contenir au minimum {{ limit }} caractères",
+        max: 32,
+        maxMessage: "La marque ne peut pas dépasser {{ limit }} caractères"
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s-]+$/',
+        message: 'La marque ne peut contenir que des lettres et des chiffres'
+    )]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'brand', targetEntity: model::class)]
+    #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Model::class)]
     private Collection $models;
 
     public function __construct()
@@ -51,7 +66,7 @@ class Brand
         return $this->models;
     }
 
-    public function addModel(model $model): static
+    public function addModel(Model $model): static
     {
         if (!$this->models->contains($model)) {
             $this->models->add($model);
@@ -61,7 +76,7 @@ class Brand
         return $this;
     }
 
-    public function removeModel(model $model): static
+    public function removeModel(Model $model): static
     {
         if ($this->models->removeElement($model)) {
             // set the owning side to null (unless already changed)

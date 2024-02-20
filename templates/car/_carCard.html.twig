@@ -1,0 +1,35 @@
+<div class="annonces__card col-lg-3 col-md-4 col-sm-12">
+	<a href="{{path('car_show', {'id': car.id})}}"><img class="img-fluid card__image" src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" alt="Photo de l'annonce"/></a>
+	<div class="card__description">
+
+		<h4 class="card__title">
+			{{car.model.brand.name}}
+			-
+			{{car.model.name}}
+		</h4>
+
+
+		<h6>{{ car.price | number_format(0, ',', ' ') }}€</h6>
+
+		<p>&nbsp;
+			{{car.energy.name}}
+			&nbsp;/&nbsp;
+			{{car.years}}
+
+		</p>
+
+		<p>
+			<i class="fa fa-dashboard"></i>
+			{{car.mileage}}km&nbsp;&nbsp;
+			<i class="fa fa-cog"></i>
+			{{car.gearbox.name}}
+		</p>
+
+		{% if is_granted('ROLE_EMPLOYEE') %}
+			<p>
+				<a href="{{path('admin_car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+				<a href="{{path('admin_car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+			</p>
+		{% endif %}
+	</div>
+</div>

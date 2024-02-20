@@ -2,40 +2,77 @@
 
 namespace App\Entity;
 
-use App\Repository\CarRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Image;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CarRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
     private ?int $mileage = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
     private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Positive]
+    #[Assert\Length(
+        min: 12,
+        minMessage: "Le contenu doit contenir au moins {{ limit }} caractères",
+        max: 256,
+        maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
+    )]
+    // #[Assert\Regex(
+    //     pattern: '/^[a-zA-Z\s-]+$/',
+    //     message: 'Seuls les chiffres et les lettres sont autorisés'
+    // )]
     private ?string $options = null;
+
+    #[ORM\Column]
+    #[Assert\Length(
+        min: 4,
+        minMessage: "Le contenu doit faire au moins {{ limit }} caractères",
+        max: 4,
+        maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
+    )]
+    #[Assert\Positive]
+    #[Assert\NotBlank(message: 'ce champ ne peut pas être vide')]
+    #[Assert\Length(
+        min: 4,
+        max: 4,
+        minMessage: 'L\'année doit faire au moins {{ limit }} caractères',
+        maxMessage: 'L\' titre ne doit pas faire plus de {{ limit }} caractères'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/',
+        message: 'L\'année ne peut contenir qu\'un chiffre'
+    )]
+    private ?int $years = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?model $models = null;
+    private ?Model $model = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
-    private ?gearbox $gearboxes = null;
+    private ?Gearbox $gearbox = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
-    private ?energy $energys = null;
+    private ?Energy $energy = null;
 
-    #[ORM\OneToMany(mappedBy: 'car', targetEntity: image::class)]
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $images;
 
     public function __construct()
@@ -47,6 +84,7 @@ class Car
     {
         return $this->id;
     }
+
 
     public function getMileage(): ?int
     {
@@ -84,51 +122,64 @@ class Car
         return $this;
     }
 
-    public function getModels(): ?model
+    public function getYears(): ?int
     {
-        return $this->models;
+        return $this->years;
     }
 
-    public function setModels(?model $models): static
+    public function setYears(int $years): static
     {
-        $this->models = $models;
+        $this->years = $years;
 
         return $this;
     }
 
-    public function getGearboxes(): ?gearbox
+
+    public function getGearbox(): ?Gearbox
     {
-        return $this->gearboxes;
+        return $this->gearbox;
     }
 
-    public function setGearboxes(?gearbox $gearboxes): static
+    public function setGearbox(?Gearbox $gearbox): static
     {
-        $this->gearboxes = $gearboxes;
+        $this->gearbox = $gearbox;
 
         return $this;
     }
 
-    public function getEnergys(): ?energy
+    public function getEnergy(): ?Energy
     {
-        return $this->energys;
+        return $this->energy;
     }
 
-    public function setEnergys(?energy $energys): static
+    public function setEnergy(?Energy $energy): static
     {
-        $this->energys = $energys;
+        $this->energy = $energy;
+
+        return $this;
+    }
+
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): static
+    {
+        $this->model = $model;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, image>
+     * @return Collection<int, Image>
      */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    public function addImage(image $image): static
+    public function addImage(Image $image): static
     {
         if (!$this->images->contains($image)) {
             $this->images->add($image);
@@ -138,7 +189,7 @@ class Car
         return $this;
     }
 
-    public function removeImage(image $image): static
+    public function removeImage(Image $image): static
     {
         if ($this->images->removeElement($image)) {
             // set the owning side to null (unless already changed)

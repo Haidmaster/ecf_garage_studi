@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Modification d'une prestation
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<h1>Modifier les horaires</h1>
+		{% include "admin/openingHour/_form.html.twig" %}
+
+		<a href="{{path('app_home')}}" class="btn btn-primary">Revenir à la liste</a>
+
+	</div>
+{% endblock %}

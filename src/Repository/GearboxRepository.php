@@ -38,7 +38,6 @@ class GearboxRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
     //    /**
     //     * @return Gearbox[] Returns an array of Gearbox objects
     //     */

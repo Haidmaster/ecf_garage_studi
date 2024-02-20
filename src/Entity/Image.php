@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ImageRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Car;
+use App\Entity\Prestation;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ImageRepository;
+
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -15,19 +16,14 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Car $car = null;
 
-    #[ORM\OneToMany(mappedBy: 'images', targetEntity: Service::class)]
-    private Collection $services;
-
-    public function __construct()
-    {
-        $this->services = new ArrayCollection();
-    }
+    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
+    private ?Prestation $prestation = null;
 
     public function getId(): ?int
     {
@@ -39,7 +35,7 @@ class Image
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -58,32 +54,24 @@ class Image
         return $this;
     }
 
-    /**
-     * @return Collection<int, Service>
-     */
-    public function getServices(): Collection
+    public function getPrestation(): ?Prestation
     {
-        return $this->services;
+        return $this->prestation;
     }
 
-    public function addService(Service $service): static
+    public function setPrestation(?Prestation $prestation): static
     {
-        if (!$this->services->contains($service)) {
-            $this->services->add($service);
-            $service->setImages($this);
+        // unset the owning side of the relation if necessary
+        if ($prestation === null && $this->prestation !== null) {
+            $this->prestation->setImage(null);
         }
 
-        return $this;
-    }
-
-    public function removeService(Service $service): static
-    {
-        if ($this->services->removeElement($service)) {
-            // set the owning side to null (unless already changed)
-            if ($service->getImages() === $this) {
-                $service->setImages(null);
-            }
+        // set the owning side of the relation if necessary
+        if ($prestation !== null && $prestation->getImage() !== $this) {
+            $prestation->setImage($this);
         }
+
+        $this->prestation = $prestation;
 
         return $this;
     }

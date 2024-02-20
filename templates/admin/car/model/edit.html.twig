@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage V.Parrot - Modification d'un modèle
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<h1>Modifier un model</h1>
+		{% include "model/_form.html.twig" %}
+
+		<a href="{{path('admin_model_index')}}" class="btn btn-primary">Revenir à la liste</a>
+
+	</div>
+{% endblock %}
