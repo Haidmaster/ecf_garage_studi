@@ -42,8 +42,6 @@ La valeur la plus importante étant le role, pensez à bien échaper les doubles
 
 Ajoutez les fichiers de configuration des variables d'environnement (.env, .env.local).
 
-Ce projet nécessite le paramétrage de APP_ENV, APP_SECRET, DATABASE_URL
-
 Pour servir votre application, lancez la commande :
 
 symfony server:start
@@ -54,14 +52,13 @@ Ouvrez votre navigateur sur http://localhost:8000/
 
 Pour plus d'informations, vous pouvez lire la documentations symfony : https://symfony.com/doc/current/setup.html
 
-
 CONNEXION AU BACK-OFFICE
 
     Cliquez sur Espace Professionel en haut à droite de la navbar
     Entrez le nom d'utilisateur et le mot de passe de l'administrateur
     Vous êtes maintenant connecté en tant qu'administrateur et pouvez gérer les employées, les véhicules, etc;
 
-DECONNEXION
-    Pour vous déconnecter de l'administration, cliquez simplement sur Se déconnecter
+DECONNEXION DU BACK-OFFICE
+  Il vous suffit simplement de cliquer sur se déconnecter.
 
   
