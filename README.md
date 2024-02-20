@@ -1,11 +1,8 @@
 Ecf_Garage_Studi V.PARROT
 
-GARAGE V.PARROT est une application web pour un garage automobile.
+GARAGE V.PARROT est une application web pour un garage automobile, dans le cadre d'un projet de fin de formation.
 
 Cette application a été développée avec le framework Symfony version 6.4.0.
-
-Version en ligne :
-Prérequis
 
 Pour exécuter cette application en local, vous aurez besoin de :
 
