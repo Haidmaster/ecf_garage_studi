@@ -43,6 +43,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'Utilisateur créé avec succès');
+            return $this->redirectToRoute('admin_user_index');
         }
         return $this->render('admin/user/create.html.twig', [
             'userForm' => $form->createView(),
