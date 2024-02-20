@@ -45,6 +45,7 @@ a {
   border-radius: 5px;
   padding: 10px 20px;
   display: inline-block;
+  color: var(--color-white);
 }
 
 .button-orange {
@@ -58,7 +59,7 @@ a {
   transition: all 0.5s;
 }
 
-.button-orang:hover {
+.button-orange:hover {
   background-position: left;
 }
 
@@ -77,9 +78,8 @@ nav {
   height: 5rem;
 }
 
-.navbar__logo img {
-  width: 6rem;
-  height: 4rem;
+.navbar__logo {
+  width: 9rem;
 }
 
 .nav-link {
@@ -268,6 +268,7 @@ MAIN
   min-height: fit-content;
   overflow: hidden;
 }
+
 .img {
   vertical-align: middle;
   border-style: none;
