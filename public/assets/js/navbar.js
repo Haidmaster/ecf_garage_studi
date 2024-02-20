@@ -7,6 +7,6 @@ icons.addEventListener("click", () => {
 
 links.forEach((links) => {
   links.addEventListener("click", () => {
-    navigator.classList.remove("active");
+    nav.classList.remove("active");
   });
 });
