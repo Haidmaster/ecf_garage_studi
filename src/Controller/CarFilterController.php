@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Car;
 use App\Repository\CarRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,17 +11,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CarFilterController extends AbstractController
 {
-    #[Route('/car/filter', name: 'app_car_filter')]
-    public function index(CarRepository $carRepo): Response
+    #[Route('/car/energy', name: 'car_energy')]
+    public function byEnergy(CarRepository $carRepo): JsonResponse
     {
 
-
-        $carByEnergy = $carRepo->findByEnergy();
-        dd($carByEnergy);
-
-        $response = new JsonResponse();
-        $response->setData($carByEnergy);
-
-        return new JsonResponse($arrayCollection);
+        return $this->Json([$carRepo->findByEnergys()]);
     }
+    // #[Route('/car/energy', name: 'car_energy')]
+    // public function index(CarRepository $carRepo): Response
+    // {
+
+
+    //     $carByEnergy = $carRepo->findByEnergy();
+    //     dd($carByEnergy);
+
+    //     $response = new JsonResponse();
+    //     $response->setData($carByEnergy);
+
+    //     return new JsonResponse($arrayCollection);
+    // }
 }

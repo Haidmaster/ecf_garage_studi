@@ -10,8 +10,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 annonces__titles">
-					<h2 class="annonces__title">Nos véhicules d'occasions</h2>
+					<h1 class="annonces__title">Nos véhicules d'occasions</h1>
 				</div>
+			</div>
+			<div class="row filters">
+				<h5>Filtrer les annonces :</h5>
+				{% include "car/_carFilters.html.twig" %}
 			</div>
 			<div class="row annonces__cards">
 				{% for car in cars %}

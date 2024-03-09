@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\OpeningDay;
-use App\Entity\OpeningHour;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 

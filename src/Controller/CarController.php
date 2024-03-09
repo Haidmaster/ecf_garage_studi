@@ -4,9 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Repository\CarRepository;
-use App\Repository\EnergyRepository;
-use App\Repository\GearboxRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +18,7 @@ class CarController extends AbstractController
         CarRepository $carRepo
     ): Response {
 
+
         return $this->render(
             'car/index.html.twig',
             [
@@ -28,6 +26,8 @@ class CarController extends AbstractController
             ]
         );
     }
+
+
 
     #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Car $car): Response

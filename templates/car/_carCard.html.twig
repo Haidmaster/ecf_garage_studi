@@ -1,5 +1,8 @@
 <div class="annonces__card col-lg-3 col-md-4 col-sm-12">
-	<a href="{{path('car_show', {'id': car.id})}}"><img class="img-fluid card__image" src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" alt="Photo de l'annonce"/></a>
+	<div class="card__img">
+		<a href="{{path('car_show', {'id': car.id})}}"><img class="img-fluid" src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" alt="Photo de l'annonce"/></a>
+	</div>
+
 	<div class="card__description">
 
 		<h4 class="card__title">
@@ -7,9 +10,6 @@
 			-
 			{{car.model.name}}
 		</h4>
-
-
-		<h6>{{ car.price | number_format(0, ',', ' ') }}€</h6>
 
 		<p>&nbsp;
 			{{car.energy.name}}
@@ -24,6 +24,16 @@
 			<i class="fa fa-cog"></i>
 			{{car.gearbox.name}}
 		</p>
+
+		<h6>{{ car.price | number_format(0, ',', ' ') }}€</h6>
+
+		<a href="{{path('car_show', {'id': car.id})}}" class="button">
+			Plus de détails
+			<span>
+				<i class="fa fa-angle-right"></i>
+			</span>
+		</a>
+
 
 		{% if is_granted('ROLE_EMPLOYEE') %}
 			<p>

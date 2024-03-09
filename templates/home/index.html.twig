@@ -28,7 +28,9 @@
 					<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
 					<a href="{{path('car_index')}}">
 						Voir toutes nos annonce
-						<i class="fa fa-angle-right"></i>
+						<span>
+							<i class="fa fa-angle-right"></i>
+						</span>
 					</a>
 				</div>
 			</div>
@@ -47,7 +49,7 @@
 
 	<section class="prestations" id="prestations">
 		<div class="container">
-			<div class="row prestations__cards">
+			<div class="row">
 				<h2 class="prestations__title">Nos prestations</h2>
 				{% for prestation in prestations %}
 					{% include "prestation/index.html.twig" %}

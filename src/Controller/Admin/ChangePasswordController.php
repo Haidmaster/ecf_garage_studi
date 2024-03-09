@@ -47,10 +47,10 @@ class ChangePasswordController extends AbstractController
                 'Le mot de passe a bien été modifié.'
             );
 
-            return $this->redirectToRoute('admin_user_show');
+            return $this->redirectToRoute('admin_user_index');
         }
 
-        return $this->render('admin/user/_editpassword.html.twig', [
+        return $this->render('admin/user/editpassword.html.twig', [
             'passwordForm' => $form->createView()
         ]);
     }

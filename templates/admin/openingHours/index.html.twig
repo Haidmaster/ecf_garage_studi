@@ -1,0 +1,13 @@
+{% for openingHour in openingHours %}
+	<tr>
+		<td>{{openingHour.openingDay}}</td>
+		<td>{{openingHour.openAm}}
+			-
+			{{openingHour.closeAm}}
+		</td>
+		<td>{{openingHour.openPm}}
+			-
+			{{openingHour.closePm}}
+		</td>
+	</tr>
+{% endfor %}

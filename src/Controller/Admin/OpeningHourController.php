@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/horaires', name: 'admin_hours_', methods: ['GET'])]
-class FooterController extends AbstractController
+class OpeningHourController extends AbstractController
 {
 
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(OpeningHourRepository $repo): Response
+    public function index(OpeningDayRepository $repo): Response
     {
         return $this->render(
-            '_partials/footer.html.twig',
+            'admin/openingHours/index.html.twig',
             [
                 'openingHours' => $repo->findAll()
             ]
@@ -28,6 +28,7 @@ class FooterController extends AbstractController
     #[Route('/creation', name: 'create', methods: ['GET', 'POST'])]
     public function add(Request $request, OpeningHourRepository $repo): Response
     {
+
 
         $openingHour = new OpeningHour();
         $form = $this->createForm(OpeningHourType::class, $openingHour);
@@ -39,7 +40,7 @@ class FooterController extends AbstractController
             return $this->redirectToRoute('admin_hours_index');
         }
 
-        return $this->render('admin/openingHour/create.html.twig', [
+        return $this->render('admin/openingHours/create.html.twig', [
             'openingHour' => $openingHour,
             'formOpeningHour' => $form->createView()
         ]);
@@ -56,7 +57,7 @@ class FooterController extends AbstractController
             return $this->redirectToRoute('admin_hours_index');
         }
 
-        return $this->render('admin/car/OpeningHour/edit.html.twig', [
+        return $this->render('admin/openingHour/edit.html.twig', [
             'formOpeningHour' => $form->createView()
         ]);
     }
