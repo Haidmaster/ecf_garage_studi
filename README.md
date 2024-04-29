@@ -28,6 +28,8 @@ Suivez ces étapes pour installer et exécuter le projet en local :
     Définissez la variable DATABASE_URL avec les informations de connexion à la base de données
 
     Créer la base de données : symfony console doctrine:database:create
+    
+    Exécuter la commande symfony console doctrine:make:migration
 
     Exécuter les migrations pour créer les tables dans la base de données : symfony console doctrine:migrations:migrate 
 
