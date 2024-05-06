@@ -10,8 +10,8 @@
 }
 
 /* 
-RESET 
-*/
+  RESET 
+  */
 
 * {
   margin: 0;
@@ -26,8 +26,8 @@ html {
 body {
   overflow-x: hidden !important;
   font-family: var(--font-secondary);
-  background-color: var(--color-white);
-  color: var(--color-light-black);
+  background-color: var(--color-light-black);
+  color: var(--color-white);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
 
@@ -92,8 +92,8 @@ h6 {
 }
 
 /*
-HEADER  
-*/
+  HEADER  
+  */
 
 /* navbar */
 
@@ -102,12 +102,16 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0.62rem;
-  height: 5rem;
+  padding: 1%;
+  height: 4rem;
+  background: linear-gradient(var(--color-light-black), #38383d);
+  padding-inline: 2rem;
 }
 
 .navbar__logo {
   width: 9rem;
+  margin-top: 1rem;
+  padding: 1%;
 }
 
 .nav-link {
@@ -156,12 +160,13 @@ nav ul {
   nav ul {
     position: fixed;
     left: -100%;
-    top: 8%;
+    top: 6%;
     flex-direction: column;
-    background-color: var(--color-light-black);
+    background: linear-gradient(var(--color-light-black), #38383d);
     width: 100%;
     text-align: center;
     transition: 0.25s;
+    padding: 2%;
   }
   nav li {
     padding: 0.18rem 0;
@@ -190,8 +195,8 @@ nav ul {
   color: var(--color-red) !important;
 }
 /*
-MAIN
-*/
+  MAIN
+  */
 
 /* section hero */
 .hero {
@@ -276,7 +281,7 @@ MAIN
   font-weight: 600;
 }
 .prestation__description {
-  color: var(--color-light-black);
+  color: var(--color-white);
   font-weight: 500;
 }
 
@@ -289,7 +294,7 @@ MAIN
   color: var(--color-orange);
   padding: 2%;
   margin-top: 3rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .annonces__cards {
@@ -306,6 +311,7 @@ MAIN
   border-style: none;
   padding: 0;
   min-height: 13rem;
+  width: 100%;
 }
 
 .card__img {
@@ -313,10 +319,11 @@ MAIN
 }
 
 .annonces__card {
-  border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background-color: var(--color-light-black);
   color: var(--color-white);
+  background: linear-gradient(var(--color-light-black), #38383d);
+  border-radius: 20px 20px;
 }
 
 .card__title {
@@ -324,23 +331,21 @@ MAIN
   font-size: 1.5rem;
   font-weight: 600;
 }
-.card__description {
+/* .card__description {
   padding: 1%;
-  border-radius: 0 0 20px 20px;
-  border: 1px solid var(--color-light-black);
-}
+} */
 
 .card__price {
   font-weight: 700;
 }
 
 /* 
-FOOTER
- */
+  FOOTER
+   */
 
 .footer {
-  background-color: var(--color-light-black) !important;
   margin-top: 10%;
   padding-top: 2%;
   color: var(--color-white);
+  background: linear-gradient(var(--color-light-black), #38383d);
 }

@@ -23,22 +23,18 @@
 	{# START: section arrivages #}
 	<section class="annonces" id="{{path('car_index')}}">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12 annonces__titles">
-					<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
-					<a href="{{path('car_index')}}">
-						Voir toutes nos annonce
-						<span>
-							<i class="fa fa-angle-right"></i>
-						</span>
-					</a>
-				</div>
+			<div class="annonces__titles">
+				<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
+				<a href="{{path('car_index')}}">
+					Voir toutes nos annonce
+					<span>
+						<i class="fa fa-angle-right"></i>
+					</span>
+				</a>
 			</div>
-			<div class="row annonces__cards">
-				{% for car in cars|slice(0,3)%}
-					{% include "car/_carCard.html.twig" %}
-				{% endfor %}
 
+			<div class="row annonces__cards">
+				{% include "car/_carCard.html.twig" %}
 			</div>
 		</div>
 	</section>

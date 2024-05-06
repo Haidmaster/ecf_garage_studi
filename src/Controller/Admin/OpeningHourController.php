@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\OpeningHour;
 use App\Form\OpeningHourType;
+use App\Repository\OpeningDayRepository;
 use App\Repository\OpeningHourRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

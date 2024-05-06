@@ -53,7 +53,7 @@ class PrestationCrudController extends AbstractController
             $prestation->setImage($img);
             $repo->save($prestation, true);
             $this->addFlash('succes', 'La prestation a bien été ajoutée.');
-            return $this->redirectToRoute('home/#prestations');
+            return $this->redirectToRoute('app_home/#prestations');
         }
 
         return $this->render('admin/prestation/create.html.twig', [
@@ -70,7 +70,7 @@ class PrestationCrudController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // On récupère les images
+
             $image = $form->get('image')->getData();
 
 
@@ -85,7 +85,7 @@ class PrestationCrudController extends AbstractController
             $prestation->setImage($img);
 
             $repo->save($prestation, true);
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('admin/prestation/edit.html.twig', [
@@ -97,12 +97,11 @@ class PrestationCrudController extends AbstractController
     #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
     public function delete(Request $request, prestation $prestation, PrestationRepository $repo): Response
     {
+
         if ($this->isCsrfTokenValid('delete' . $prestation->getId(), $request->request->get('_token'))) {
             $repo->remove($prestation, true);
         }
 
-        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
-        // $repo->remove($prestation, true);
-        // return $this->redirectToRoute('home');
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }

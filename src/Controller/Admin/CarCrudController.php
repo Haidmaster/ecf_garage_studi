@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 #[Route('/admin/annonce', name: 'admin_car_', methods: ['GET'])]
 class CarCrudController extends AbstractController
@@ -20,10 +21,7 @@ class CarCrudController extends AbstractController
     {
 
         $car = new Car();
-        $form = $this->createForm(CarType::class, $car, [
-            'action' => $this->generateUrl('admin_car_create'),
-            'validation_groups' => ['Default', 'create'],
-        ]);
+        $form = $this->createForm(CarType::class, $car);
 
         // On recupère la requete du formulaire
         $form->handleRequest($request);
@@ -60,12 +58,11 @@ class CarCrudController extends AbstractController
     }
 
     #[Route('/edition/{id}', name: 'edit', requirements: ['id' => "\d+"], methods: ['GET', 'POST'])]
-    public function edit(Car $car, Request $request, CarRepository $repo, $id): Response
+    public function edit(Car $car, Request $request, CarRepository $repo, SessionInterface $session,): Response
     {
-        $form = $this->createForm(CarType::class, $car, [
-            'action' => $this->generateUrl('admin_car_edit', array('id' => $id, 'car' => $car)),
-            'validation_groups' => ['default', 'edit'],
-        ]);
+
+        $session->set('previous_url', $request->getUri());
+        $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,13 +76,14 @@ class CarCrudController extends AbstractController
     }
 
     #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
-    public function delete(Request $request, Car $car, CarRepository $repo): Response
+    public function delete(Car $car, CarRepository $repo): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $car->getId(), $request->request->get('_token'))) {
-            $repo->remove($car, true);
-        }
+
+        $repo->remove($car, true);
+
 
         return $this->redirectToRoute('car_index', [], Response::HTTP_SEE_OTHER);
+        $this->addFlash('success', 'Utilisateur supprimé avec succès');
     }
     // $repo->remove($car, true);
     // return $this->redirectToRoute('car_index');

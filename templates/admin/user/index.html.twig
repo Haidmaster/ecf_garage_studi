@@ -5,67 +5,66 @@
 
 {% block content %}
 	<div class="container">
-		<div class="row mt-4">
-			<div class="container">
-				<h1>Accueil utilisateurs</h1>
-				{% if app.user %}
-					<p>
-						<i class="fa-solid fa-user"></i>
-						Compte connecté:
-						{{ app.user.userIdentifier }}
-						/
-						<i class="fa-solid fa-right-from-bracket">
-							<a class="" href="{{ path('app_logout') }}"></i>
-							Se déconnecter</a>
-					</p>
-				{% endif %}
+		<div>
+			<h1 class="mt-4">Accueil utilisateurs</h1>
+			{% if app.user %}
+				<p>
+					<i class="fa-solid fa-user"></i>
+					Compte connecté:
+					{{ app.user.userIdentifier }}
+					/
+					<i class="fa-solid fa-right-from-bracket">
+						<a class="" href="{{ path('app_logout') }}"></i>
+						Se déconnecter</a>
+				</p>
+			{% endif %}
 
 
-				{% for message in app.flashes('success') %}
-					<div class="alert alert-success">
-						{{ message }}
-					</div>
-				{% endfor %}
-
-				<div class="row">
-					<div class="col-12 mt-4 mx-auto">
-						<h4>
-							<a href="{{path ('admin_user_create')}}" class="nav-link px-0">
-								<i class="fa-solid fa-plus"></i>
-								<span class="d-none d-sm-inline">Créer un nouvel utilisateur</span>
-							</a>
-						</h4>
-						<table class="table table-stripped">
-							<thead>
-								<tr>
-									<th scope="col">ID</th>
-									<th scope="col">E-mail</th>
-									<th scope="col"></th>
-								</tr>
-							</thead>
-							<tbody>
-
-								{% for user in users %}
-									<tr>
-										<td scope="col">{{user.id}}</td>
-										<td>{{user.email}}</td>
-										<td>
-											<button class="btn btn-outline-success btn-sm">
-												<a href="{{ path('admin_user_edit.password',{id: user.id}) }}">Modifier mot de passe</a>
-											</button>
-										</td>
-										<td>
-											<button class="btn btn-primary btn-sm">
-												<a href="{{ path('admin_user_delete',{id: user.id}) }}">Supprimer</a>
-											</button>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					</div>
-
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
 				</div>
+			{% endfor %}
+
+			<div class="row">
+				<div class="col-12 mt-4 mx-auto">
+					<h4>
+						<a href="{{path ('admin_user_create')}}" class="nav-link px-0">
+							<i class="fa-solid fa-plus"></i>
+							<span class="d-none d-sm-inline">Créer un nouvel utilisateur</span>
+						</a>
+					</h4>
+					<table class="table table-stripped">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">E-mail</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for user in users %}
+								<tr>
+									<td scope="col">{{user.id}}</td>
+									<td>{{user.email}}</td>
+									<td>
+										<button class="btn btn-outline-success btn-sm">
+											<a href="{{ path('admin_user_edit.password',{id: user.id}) }}">Modifier mot de passe</a>
+										</button>
+									</td>
+									<td>
+										<button class="btn btn-primary btn-sm">
+											<a href="{{ path('admin_user_delete',{id: user.id}) }}">Supprimer</a>
+										</button>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
 			</div>
+
 		</div>
 	{% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Brand;
 use App\Entity\Model;
 use App\Entity\Energy;
 use App\Entity\Gearbox;
+use App\Entity\Prestation;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -16,21 +17,21 @@ class CataloguesFixtures extends Fixture
 
         /*********  PRESTATIONS FIXTURES  *********/
 
-        // $prestations =
-        //     [
-        //         'Entretien avec remise à zéro' => ['Le Garage effectue vos révisions périodiques et vidanges avec remise à zéro des témoins d’entretien, sur tous types de véhicules, même les plus récents.'],
-        //         'Mécanique générale' => ['Nous intervenons sur tous types de travaux, sur de l’entretien classique aussi bien que sur de la mécanique lourde, comme remplacement ou réfection d’un moteur.'],
-        //         'Diagnostic et recherche de pannes' => ['Le garage est équipé de matériel diagnostic haut de gamme mis à jour afin de pouvoir interroger vos calculateurs et faire le meilleur diagnostic possible.'],
-        //     ];
+        $prestations =
+            [
+                'Entretien avec remise à zéro' => ['Le Garage effectue vos révisions périodiques et vidanges avec remise à zéro des témoins d’entretien, sur tous types de véhicules, même les plus récents.'],
+                'Mécanique générale' => ['Nous intervenons sur tous types de travaux, sur de l’entretien classique aussi bien que sur de la mécanique lourde, comme remplacement ou réfection d’un moteur.'],
+                'Diagnostic et recherche de pannes' => ['Le garage est équipé de matériel diagnostic haut de gamme mis à jour afin de pouvoir interroger vos calculateurs et faire le meilleur diagnostic possible.'],
+            ];
 
-        // foreach ($prestations as $prestation_name =>  $content) {
-        //     $prestation = new Prestation();
-        //     $prestation->setName($prestation_name);
-        //     foreach ($content as $prestation_content) {
-        //         $prestation->setContent($prestation_content);
-        //     }
-        //     $manager->persist($prestation);
-        // }
+        foreach ($prestations as $prestation_name =>  $content) {
+            $prestation = new Prestation();
+            $prestation->setName($prestation_name);
+            foreach ($content as $prestation_content) {
+                $prestation->setContent($prestation_content);
+            }
+            $manager->persist($prestation);
+        }
         /*********  MODELS FIXTURES  *********/
 
         $modelList = [
@@ -81,6 +82,6 @@ class CataloguesFixtures extends Fixture
             $manager->persist($gearbox);
         }
 
-        $manager->flush();
+        // $manager->flush();
     }
 }

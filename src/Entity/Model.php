@@ -23,13 +23,13 @@ class Model
     #[ORM\Column(length: 32)]
     #[Assert\NotBlank(message: "Veuillez saisir un modèle")]
     #[Assert\Length(
-        min: 2,
+        min: 1,
         minMessage: "La marque doit contenir au minimum {{ limit }} caractères",
         max: 32,
         maxMessage: "La marque ne peut pas dépasser {{ limit }} caractères"
     )]
     #[Assert\Regex(
-        pattern: '/^[a-zA-Z\s-]+$/',
+        pattern: '/^[0-9-a-zA-Z\s-]+$/',
         message: 'Le modèle ne peut contenir que des lettres et des chiffres'
     )]
     private ?string $name = null;

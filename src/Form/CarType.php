@@ -24,7 +24,7 @@ class CarType extends AbstractType
             ->add('model', EntityType::class, [
                 'class' => Model::class,
                 'choice_label' => 'name',
-                'label' => 'Selectionnez le modèle',
+                'label' => 'Selectionnez un modèle',
                 'group_by' => 'brand.name',
             ])
             ->add('energy', EntityType::class, [
@@ -60,7 +60,7 @@ class CarType extends AbstractType
             ])
             ->add('options', TextareaType::class, [
                 'label' => 'Equipements et options',
-                'attr' => ['placeholder' => '(Caméra de recule,ouverture sans clés,etc..)']
+                'attr' => ['placeholder' => 'Caméra de recul,ouverture sans clés,etc..']
 
             ])
 

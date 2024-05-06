@@ -8,12 +8,13 @@
 	<section class="container details">
 		<h1 class="prestations__title ">Fiche détaillée</h1>
 		<div class="container">
+
 			<div class="row">
 				{% if app.request.attributes.get('id') is defined and app.request.attributes.get('id') is not null %}
 					{% set variables = {'car_': car, id : app.request.attributes.get('id')} %}
 				{% endif %}
 				<div class="card__image col-md-4 d-flex flex-column bd-highlight mb-3">
-					<div class="p-2 bd-highlight flex-grow-1"><img src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" class="img-fluid"/></div>
+					<div class="p-2 bd-highlight flex-grow-1"><img src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" class="img-fluid"/></div>
 				</div>
 				<div class="details__description col-md-7">
 
@@ -24,7 +25,7 @@
 
 					<p class="w-100">Equipement et options:
 					</p>
-					<p>{{car.options}}</p>
+					<p>{{car.options }}</p>
 					<p>Energie:
 						{{car.energy.name}}</p>
 					<p>Boîte de vitesse:
@@ -44,14 +45,12 @@
 						</div>
 					{% endif %}
 				</div>
-
 			</div>
 
 			<div class="row g-3">
 				<div class="col-md-4 ">
 					<img src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" class="img-fluid"/>
 				</div>
-
 				<div class="col-md-4 ">
 					<img src="{{ asset ('assets/uploads/car/' ~ car.images[2].name )}}" class="img-fluid"/>
 				</div>
@@ -60,20 +59,21 @@
 				</div>
 			</div>
 
-			<div class="row justify-content-center mt-4">
-				<div class="col-md-8">
-					<div class="form__content ">
-						<h3>Cette
-							{{car.model.brand.name}}
-							-
-							{{car.model.name}}
-							vous interesse ?</h3>
-						<h4>Contactez nous:</h4>
-						{% include "partials/_contactForm.html.twig" %}
-					</div>
-				</div>
-			</div>
-
 		</div>
 	</section>
+
+	<section class="contact row justify-content-center mt-4 ">
+		<div class="col-md-8">
+			<div class="form__content ">
+				<h3>Cette
+					{{car.model.brand.name}}
+					-
+					{{car.model.name}}
+					vous interesse ?</h3>
+				<h4>Contactez nous:</h4>
+				{% include "partials/_contactForm.html.twig" %}
+			</div>
+		</div>
+	</section>
+
 {% endblock %}

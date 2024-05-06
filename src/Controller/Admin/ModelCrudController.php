@@ -37,7 +37,7 @@ class ModelCrudController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $repo->save($model, true);
             $this->addFlash('succes', 'La modele a bien été ajoutée.');
-            return $this->redirectToRoute('model_index');
+            return $this->redirectToRoute('admin_model_index');
         }
 
         return $this->render('admin/car/model/create.html.twig', [
@@ -62,7 +62,7 @@ class ModelCrudController extends AbstractController
         ]);
     }
 
-    #[Route('/suppression/{id}', name: 'delete', methods: ['GET'], requirements: ['id' => "\d+"],)]
+    #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
     public function delete(Model $model, ModelRepository $repo, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete' . $model->getId(), $request->request->get('_token'))) {

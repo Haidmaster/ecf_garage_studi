@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Car;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -41,103 +40,31 @@ class CarRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     *  @return Car[]
-     */
-
-    public function findByBrand(): array
+    public function findByGearbox($gearboxId = null): array
     {
-        $dql = 'SELECT car FROM App\Entity\Brand as car ORDER BY car.brand';
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->leftJoin('c.gearbox', 'g');
 
-        $query = $this->getEntityManager()->createQuery($dql);
+        if ($gearboxId !== null) {
+            $queryBuilder->where('g.id = :gearboxId')
+                ->setParameter('gearboxId', $gearboxId);
+        }
 
-        return $query->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
 
-
-    /**
-     *  @return Car[]
-     */
-
-    public function findByGearboxes(): array
+    public function findByEnergy($energyId = null): array
     {
-        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.gearbox';
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->leftJoin('c.energy', 'e');
 
-        $query = $this->getEntityManager()->createQuery($dql);
+        if ($energyId !== null) {
+            $queryBuilder->where('e.id = :energyId')
+                ->setParameter('energyId', $energyId);
+        }
 
-        return $query->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
-
-    /**
-     *  @return Car[]
-     */
-
-    public function findBynEnergys(): array
-    {
-        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.energy';
-
-        $query = $this->getEntityManager()->createQuery($dql);
-
-        return $query->getResult();
-    }
-
-    /**
-     *  @return Car[]
-     */
-
-    public function findByMinPrice(): array
-    {
-        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.price ASC';
-
-        $query = $this->getEntityManager()->createQuery($dql);
-        dd($query->getSQL());
-
-        return $query->getResult();
-    }
-
-    /**
-     *  @return Car[]
-     */
-
-    public function findByMaxPrice(): array
-    {
-        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.price DESC';
-
-        $query = $this->getEntityManager()->createQuery($dql);
-
-        return $query->getResult();
-    }
-
-
-    /**
-     *  @return Car[]
-     */
-
-    public function findByNewer(): array
-    {
-        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.year DESC';
-
-        $query = $this->getEntityManager()->createQuery($dql);
-
-        return $query->getResult();
-    }
-
-    /**
-     *  @return Car[]
-     */
-
-    public function findByOlder(): array
-    {
-        $dql = 'SELECT car FROM App\Entity\Car as car ORDER BY car.year ASC';
-
-        $query = $this->getEntityManager()->createQuery($dql);
-
-        return $query->getResult();
-    }
-
-
-
-
 
     //    /**
     //     * @return Car[] Returns an array of Car objects

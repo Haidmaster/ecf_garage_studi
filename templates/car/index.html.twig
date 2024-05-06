@@ -6,24 +6,39 @@
 {% block content %}
 
 	<!--Section: Annonces -->
-	<section class="annonces" id="{{path('car_index')}}">
-		<div class="container">
+	<section class="container annonces" id="{{path('car_index')}}">
+		<h1 class="mt-4 py-2 annonces__title text-center">Nos véhicules d'occasions</h1>
+		<form class="form-check mt-4" id="filters">
+			<h4>Filtrer les annonces</h4>
 			<div class="row">
-				<div class="col-md-12 annonces__titles">
-					<h1 class="annonces__title">Nos véhicules d'occasions</h1>
+
+				<div class="col-md-3">
+					<h6>Par transmission :</h6>
+					<select class="form-select">
+						<option selected>Selectionnez la boite de vitesse</option>
+						{% for gearbox in gearboxes %}
+							<option name="gearboxId" id=" car-by-gearbox">{{gearbox.name}}</option>
+						{% endfor %}
+					</select>
 				</div>
-			</div>
-			<div class="row filters">
-				<h5>Filtrer les annonces :</h5>
-				{% include "car/_carFilters.html.twig" %}
-			</div>
-			<div class="row annonces__cards">
-				{% for car in cars %}
-					{% include "car/_carCard.html.twig" %}
-				{% endfor %}
+
+				<div class="col-md-3">
+					<h6>Par carburant :</h6>
+					<select class="form-select">
+						<option selected>Selectionnez par energie</option>
+						{% for energy in energys %}
+							<option value={{energy.id}} name="energyId" id=" car-by-energy">{{energy.name}}</option>
+						{% endfor %}
+					</select>
+				</div>
 
 			</div>
+		</form>
+
+		<div class="row annonces__cards mt-4">
+			{% include "car/_carCard.html.twig" %}
 		</div>
+
 	</section>
 	<!-- End Section: Annonces -->
 {% endblock %}

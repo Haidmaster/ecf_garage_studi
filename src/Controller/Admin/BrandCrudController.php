@@ -36,7 +36,7 @@ class BrandCrudController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $repo->save($brand, true);
             $this->addFlash('succes', 'La marque a bien été ajoutée.');
-            return $this->redirectToRoute('brand_index');
+            return $this->redirectToRoute('admin_brand_index');
         }
 
         return $this->render('admin/car/brand/create.html.twig', [

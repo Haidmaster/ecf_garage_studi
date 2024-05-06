@@ -1,45 +1,48 @@
-<div class="annonces__card col-lg-3 col-md-4 col-sm-12">
-	<div class="card__img">
-		<a href="{{path('car_show', {'id': car.id})}}"><img class="img-fluid" src="{{ asset ('assets/uploads/car/' ~ car.images[1].name )}}" alt="Photo de l'annonce"/></a>
-	</div>
-
-	<div class="card__description">
-
-		<h4 class="card__title">
-			{{car.model.brand.name}}
-			-
-			{{car.model.name}}
-		</h4>
-
-		<p>&nbsp;
-			{{car.energy.name}}
-			&nbsp;/&nbsp;
-			{{car.years}}
-
-		</p>
-
-		<p>
-			<i class="fa fa-dashboard"></i>
-			{{car.mileage}}km&nbsp;&nbsp;
-			<i class="fa fa-cog"></i>
-			{{car.gearbox.name}}
-		</p>
-
-		<h6>{{ car.price | number_format(0, ',', ' ') }}€</h6>
-
-		<a href="{{path('car_show', {'id': car.id})}}" class="button">
-			Plus de détails
-			<span>
-				<i class="fa fa-angle-right"></i>
-			</span>
-		</a>
+{% for car in cars %}
+	<div class="annonces__card car-content-js col-lg-3 col-md-4 col-sm-12">
 
 
-		{% if is_granted('ROLE_EMPLOYEE') %}
-			<p>
-				<a href="{{path('admin_car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-				<a href="{{path('admin_car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+		<div class="card__description">
+			<div class="card__img">
+				<a href="{{path('car_show', {'id': car.id})}}"><img class="img-fluid" src="{{ asset('assets/uploads/car/' ~ car.images[0].name )}}" alt="Photo de l'annonce"/></a>
+			</div>
+
+			<h4 class="card__title car-title-js">
+				{{car.model.brand.name}}
+				-
+				{{car.model.name}}
+			</h4>
+
+			<p class="car-energy">&nbsp;
+				{{car.energy.name}}
+				&nbsp;/&nbsp;
+				<span class="car-years-js">{{car.years}}</span>
 			</p>
-		{% endif %}
+
+			<p>
+				<i class="fa fa-dashboard"></i>
+				{{car.mileage}}km&nbsp;&nbsp;
+				<i class="fa fa-cog"></i>
+				{{car.gearbox.name}}
+			</p>
+
+			<h6>{{ car.price | number_format(0, ',', ' ') }}€</h6>
+
+			<a href="{{path('car_show', {'id': car.id})}}" class="button">
+				Plus de détails
+				<span>
+					<i class="fa fa-angle-right"></i>
+				</span>
+			</a>
+
+			{% if is_granted('ROLE_EMPLOYEE') %}
+				<p>
+					<a href="{{path('admin_car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+					<a href="{{path('admin_car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+				</p>
+			{% endif %}
+
+		</div>
+
 	</div>
-</div>
+{% endfor %}

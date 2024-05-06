@@ -66,12 +66,13 @@ class UserController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function delete(int $id, EntityManagerInterface $em)
+    public function delete(Request $request, user $user, UserRepository $repo)
     {
-        $user = $em->find(User::class, $id);
-        $em->remove($user);
-        $em->flush();
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $repo->remove($user, true);
+        }
+
+        return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
         $this->addFlash('success', 'Utilisateur supprimé avec succès');
-        return $this->redirectToRoute('admin_user_index');
     }
 }
