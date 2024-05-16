@@ -7,8 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BrandRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[UniqueEntity('name', message: "Cette marque existe déjà")]
 #[ORM\Entity(repositoryClass: BrandRepository::class)]
@@ -20,6 +22,7 @@ class Brand
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]
+    #[Groups(['getCars'])]
     #[Assert\NotBlank(message: "Veuillez saisir une marque")]
     #[Assert\Length(
         min: 2,

@@ -15,10 +15,7 @@ class PrestationController extends AbstractController
     {
         return $this->render(
             'home/index.html.twig',
-            [
-                'prestations' => $repo->findAll(),
-                'prestation' => $prestation
-            ]
+            ['prestations' => $repo->findAll(), 'prestation' => $prestation]
         );
     }
 }

@@ -6,12 +6,13 @@ use App\Entity\Car;
 use App\Repository\CarRepository;
 use App\Repository\EnergyRepository;
 use App\Repository\GearboxRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
-#[Route('/annonce', name: 'car_', methods: ['GET'])]
+
+#[Route('/annonces', name: 'car_', methods: ['GET'])]
 class CarController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]

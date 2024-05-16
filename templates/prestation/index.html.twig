@@ -1,13 +1,13 @@
-<div class="col-lg-4 prestation">
+<div class="col-lg-4 mt-4 prestation">
 	<img class="img-fluid prestation__image" src="{{ asset ('assets/uploads/prestation/' ~ prestation.image.name )}}" alt="La photo de la prestation"/>
 
 	<h4 class="prestation__title">{{prestation.name}}</h4>
 	<p class="prestation__description">{{prestation.content}}</p>
 	<p>
-		<a class="button button-orange" href="#">Nous contacter</a>
+		<a class="button button-orange btn btn-sm" href="#">Nous contacter</a>
 		{% if is_granted('ROLE_ADMIN') %}
-			<a href="{{path('admin_prestation_edit', {'id': prestation.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-			<a href="{{path('admin_prestation_delete', {'id': prestation.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+			<a href="{{path('admin_prestation_edit', {'id': prestation.id})}}" class="btn btn-info btn-sm">Modifier</a>
+			<a href="{{path('admin_prestation_delete', {'id': prestation.id})}}" class=" btn btn-warning btn-sm">Supprimer</a>
 		{% endif %}
 	</p>
 </div>

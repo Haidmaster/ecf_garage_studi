@@ -6,6 +6,7 @@ use App\Entity\Car;
 use App\Entity\Prestation;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
@@ -17,6 +18,7 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['getCars'])]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]

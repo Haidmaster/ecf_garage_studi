@@ -6,43 +6,47 @@
 {% block content %}
 
 	<!--Section: Annonces -->
-	<section class="container annonces" id="{{path('car_index')}}">
-		<h1 class="mt-4 py-2 annonces__title text-center">Nos véhicules d'occasions</h1>
-		<form class="form-check mt-4" id="filters">
-			<h4>Filtrer les annonces</h4>
-			<div class="row">
+	<section class="container annonces">
 
-				<div class="col-md-3">
-					<h6>Par transmission :</h6>
-					<select class="form-select">
-						<option selected>Selectionnez la boite de vitesse</option>
-						{% for gearbox in gearboxes %}
-							<option name="gearboxId" id=" car-by-gearbox">{{gearbox.name}}</option>
-						{% endfor %}
-					</select>
-				</div>
+		<h1 class="mt-4 py-2 prestations__title text-center">Nos véhicules d'occasions</h1>
+		<hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
 
-				<div class="col-md-3">
-					<h6>Par carburant :</h6>
-					<select class="form-select">
-						<option selected>Selectionnez par energie</option>
-						{% for energy in energys %}
-							<option value={{energy.id}} name="energyId" id=" car-by-energy">{{energy.name}}</option>
-						{% endfor %}
-					</select>
-				</div>
-
+		<h2 class="mt-4">Filtrer les annonces</h2>
+		<div class="row g-0">
+			<div class="col-md-4">
+				<h6>Par transmission :</h6>
+				{% for gearbox in gearboxes %}
+					<a href="{{path('car_gearbox', {'id': gearbox.id} )}}" class=" btn btn-light btn-sm ms-1 " id="js-filter">
+						{{gearbox.name}}
+					</a>
+				{% endfor %}
 			</div>
-		</form>
+			<div class="col-md-6">
+				<h6>Par energie :</h6>
+				{% for energy in energys %}
+					<a href="{{ path('car_energy', {'id': energy.id} )}}" class="btn btn-light btn-sm ms-1" id="js-filter">
+						{{energy.name}}
+					</a>
+				{% endfor %}
+			</div>
+			<div class="col-md-2">
+				<h6>Supprimer les filtres:</h6>
+				<a href="{{ path('cars_all') }}" class="btn btn-danger btn-sm">Réinitialiser</a>
+			</div>
 
-		<div class="row annonces__cards mt-4">
+		</div>
+
+
+		<div class="row annonces__cards mt-4" id="js-car-content">
 			{% include "car/_carCard.html.twig" %}
 		</div>
+
 
 	</section>
 	<!-- End Section: Annonces -->
 {% endblock %}
 
 {% block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="{{ asset('assets/js/filters.js') }}"></script>
 {% endblock %}

@@ -25,15 +25,17 @@
 		<div class="container">
 			<div class="annonces__titles">
 				<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
-				<a href="{{path('car_index')}}">
-					Voir toutes nos annonce
-					<span>
-						<i class="fa fa-angle-right"></i>
-					</span>
-				</a>
+				<p>
+					<a href="{{path('car_index')}}">
+						Voir toutes nos annonce
+						<span>
+							<i class="fa fa-angle-right"></i>
+						</span>
+					</a>
+				</p>
 			</div>
 
-			<div class="row annonces__cards">
+			<div class="row annonces__cards mb-4">
 				{% include "car/_carCard.html.twig" %}
 			</div>
 		</div>
@@ -45,8 +47,12 @@
 
 	<section class="prestations" id="prestations">
 		<div class="container">
+			<h2 class="mb-4 mt-4 prestations__title text-center">Nos prestations</h2>
+			<p class="mb-5 text-center">
+				Toutes nos prestations pour satisfaire nos clients.
+			</p>
+			<hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
 			<div class="row">
-				<h2 class="prestations__title">Nos prestations</h2>
 				{% for prestation in prestations %}
 					{% include "prestation/index.html.twig" %}
 				{% endfor %}
@@ -54,9 +60,11 @@
 		</div>
 	</section>
 
-
 	{# END: section prestations #}
-{# START: section contact #}
-	{# {% include "partials/_contactForm.html.twig" %} #}
+
+	{# START: section contact #}
+	<div class="container">
+		{% include "partials/_contactForm.html.twig" %}
+	</div>
 	{# END: section contact #}
 {% endblock %}

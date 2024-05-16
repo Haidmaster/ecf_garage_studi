@@ -89,6 +89,7 @@ h6 {
 
 .button-red:hover {
   background-position: left;
+  color: var(--color-white);
 }
 
 /*

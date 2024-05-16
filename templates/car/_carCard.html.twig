@@ -1,32 +1,44 @@
 {% for car in cars %}
-	<div class="annonces__card car-content-js col-lg-3 col-md-4 col-sm-12">
-
-
+	<div class="annonces__card col-lg-3 col-md-4 col-sm-8 mt-3">
 		<div class="card__description">
-			<div class="card__img">
-				<a href="{{path('car_show', {'id': car.id})}}"><img class="img-fluid" src="{{ asset('assets/uploads/car/' ~ car.images[0].name )}}" alt="Photo de l'annonce"/></a>
+			<div class="card__img ">
+				<a href="{{path('car_show', {'id': car.id})}}">
+					<img class="img-fluid" src="{{ asset('assets/uploads/car/' ~ car.images[0].name )}}" alt="Photo de l'annonce"/>
+				</a>
 			</div>
 
-			<h4 class="card__title car-title-js">
+			<h4 class="card__title ">
 				{{car.model.brand.name}}
 				-
-				{{car.model.name}}
+				<span>
+					{{car.model.name}}
+				</span>
 			</h4>
 
 			<p class="car-energy">&nbsp;
-				{{car.energy.name}}
+				<span>
+					{{car.energy.name}}
+				</span>
 				&nbsp;/&nbsp;
-				<span class="car-years-js">{{car.years}}</span>
+				<span>
+					{{car.years}}
+				</span>
 			</p>
 
 			<p>
 				<i class="fa fa-dashboard"></i>
-				{{car.mileage}}km&nbsp;&nbsp;
+				<span>
+					{{car.mileage}}km&nbsp;&nbsp;
+				</span>
 				<i class="fa fa-cog"></i>
-				{{car.gearbox.name}}
+				<span>
+					{{car.gearbox.name}}
+				</span>
 			</p>
 
-			<h6>{{ car.price | number_format(0, ',', ' ') }}€</h6>
+			<h6>
+				{{ car.price | number_format(0, ',', ' ') }}€
+			</h6>
 
 			<a href="{{path('car_show', {'id': car.id})}}" class="button">
 				Plus de détails
@@ -37,12 +49,17 @@
 
 			{% if is_granted('ROLE_EMPLOYEE') %}
 				<p>
-					<a href="{{path('admin_car_edit', {'id': car.id})}}" class="btn btn-primary btn-sm">Modifier</a>
-					<a href="{{path('admin_car_delete', {'id': car.id})}}" class=" btn btn-primary btn-sm">Supprimer</a>
+					<a href="{{path('admin_car_edit', {'id': car.id})}}" class=" btn btn-info btn-sm ">Modifier</a>
+					<a href="{{path('admin_car_delete', {'id': car.id})}}" class=" btn btn-danger btn-sm">Supprimer</a>
 				</p>
 			{% endif %}
 
 		</div>
 
+
 	</div>
 {% endfor %}
+
+{% block javascripts %}
+	<script src="{{ asset('assets/js/filters.js') }}"></script>
+{% endblock %}

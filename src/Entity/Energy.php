@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EnergyRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EnergyRepository::class)]
 class Energy
@@ -17,6 +18,7 @@ class Energy
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]
+    #[Groups(['getCars'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'energy', targetEntity: Car::class)]
