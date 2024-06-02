@@ -5,8 +5,8 @@
 
 {% block content %}
 
-	<section class="container details">
-		<h2 class="mb-4 prestations__title text-center">Fiche détaillé</h2>
+	<section class="container prestations">
+		<h2 class="mb-4 prestations__title">Fiche détaillé</h2>
 		<hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
 		<div class="container">
 
@@ -14,7 +14,7 @@
 				{% if app.request.attributes.get('id') is defined and app.request.attributes.get('id') is not null %}
 					{% set variables = {'car_': car, id : app.request.attributes.get('id')} %}
 				{% endif %}
-				<div class="card__image col-md-4 d-flex flex-column bd-highlight mb-3">
+				<div class="card__image col-md-5 d-flex flex-column bd-highlight mb-3">
 					<div class="p-2 bd-highlight flex-grow-1"><img src="{{ asset ('assets/uploads/car/' ~ car.images[0].name )}}" class="img-fluid"/></div>
 				</div>
 				<div class="details__description col-md-7">

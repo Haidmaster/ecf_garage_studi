@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Car;
-use App\Entity\Prestation;
+use App\Entity\Service;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -25,7 +25,7 @@ class Image
     private ?Car $car = null;
 
     #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
-    private ?Prestation $prestation = null;
+    private ?Service $service = null;
 
     public function getId(): ?int
     {
@@ -56,24 +56,24 @@ class Image
         return $this;
     }
 
-    public function getPrestation(): ?Prestation
+    public function getservice(): ?Service
     {
-        return $this->prestation;
+        return $this->service;
     }
 
-    public function setPrestation(?Prestation $prestation): static
+    public function setservice(?Service $service): static
     {
         // unset the owning side of the relation if necessary
-        if ($prestation === null && $this->prestation !== null) {
-            $this->prestation->setImage(null);
+        if ($service === null && $this->service !== null) {
+            $this->service->setImage(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($prestation !== null && $prestation->getImage() !== $this) {
-            $prestation->setImage($this);
+        if ($service !== null && $service->getImage() !== $this) {
+            $service->setImage($this);
         }
 
-        $this->prestation = $prestation;
+        $this->service = $service;
 
         return $this;
     }

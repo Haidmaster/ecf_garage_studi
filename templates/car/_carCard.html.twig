@@ -1,5 +1,5 @@
 {% for car in cars %}
-	<div class="annonces__card col-lg-3 col-md-4 col-sm-8 mt-3">
+	<div class="annonces__card col-lg-3 col-md-3 col-sm-8 mt-3">
 		<div class="card__description">
 			<div class="card__img ">
 				<a href="{{path('car_show', {'id': car.id})}}">
@@ -42,9 +42,7 @@
 
 			<a href="{{path('car_show', {'id': car.id})}}" class="button">
 				Plus de détails
-				<span>
-					<i class="fa fa-angle-right"></i>
-				</span>
+				<i class="fa fa-angle-right"></i>
 			</a>
 
 			{% if is_granted('ROLE_EMPLOYEE') %}

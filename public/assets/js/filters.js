@@ -1,12 +1,18 @@
 function onClickBtnFilter(event) {
   event.preventDefault();
-  const url = this.href;
+  const Url = this.href;
 
-  axios.get(url).then((response) => {
-    const content = document.querySelector("#js-car-content");
-    content.innerHTML = "";
-    content.innerHTML = response.data;
-  });
+  fetch(Url + "?" + "&ajax=1", {
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const content = document.querySelector("#js-car-content");
+      content.innerHTML = data.content;
+    })
+    .catch((e) => alert(e));
 }
 
 document.querySelectorAll("#js-filter").forEach(function (link) {

@@ -1,26 +1,26 @@
-<nav id="nav">
-	<a href="{{path('app_home')}}"><img src="{{ asset('assets/images/logo-v-parrot.png')}}" alt="Logo du garage V.Parrot" class="navbar__logo img-fluid">
-	</a>
-	<ul id="menu-list">
-		<li>
-			<a class="nav-link" href="{{path('app_home')}}">Accueil</a>
-		</li>
-		<li>
-			<a class="nav-link" href="/#prestations">Nos prestations</a>
-		</li>
-		<li>
-			<a class="nav-link" href="{{path('car_index')}}" #>Nos véhicules d'occasion</a>
-		</li>
-		<li>
-			<a class="nav-link .nav-link--pro" href="{{ path('admin_index') }}">Espace professionel</a>
-		</li>
-
-
-		{% if app.user %}
+<div id="container">
+	<nav id="nav">
+		<a href="{{path('app_home')}}"><img src="{{ asset('assets/images/logo-v-parrot.png')}}" alt="Logo du garage V.Parrot" class="navbar__logo">
+		</a>
+		<ul id="menu-list">
 			<li>
-				<a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+				<a class="nav-link" href="{{path('app_home')}}">Accueil</a>
 			</li>
-		{% endif %}
-	</ul>
-	<div class="menu-icon" id="icons"></div>
-</nav>
+			<li>
+				<a class="nav-link" href="/#services">Nos prestations</a>
+			</li>
+			<li>
+				<a class="nav-link" href="{{path('car_index')}}">Nos véhicules d'occasion</a>
+			</li>
+			<li>
+				<a class="nav-link" href="{{ path('admin_index') }}">Espace professionel</a>
+			</li>
+			{% if app.user %}
+				<li>
+					<a class="nav-link " href="{{ path('app_logout') }}">Se déconnecter</a>
+				</li>
+			{% endif %}
+		</ul>
+		<div class="menu-icon" id="icons"></div>
+	</nav>
+</div>

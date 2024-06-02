@@ -1,7 +1,6 @@
 /* Variable define */
 :root {
   --color-red: #d60c0f;
-  --color-orange: #ff5912;
   --color-light-black: #212529;
   --color-black: #121212;
   --color-white: #ffff;
@@ -28,7 +27,6 @@ body {
   font-family: var(--font-secondary);
   background-color: var(--color-light-black);
   color: var(--color-white);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
 
 ol,
@@ -50,7 +48,15 @@ h4,
 h5,
 h6 {
   font-family: var(--font-primary);
-  color: var(--color-orange);
+  color: var(--color-red);
+}
+
+p,
+a,
+ul,
+li {
+  color: var(--color-white);
+  font-family: var(--font-secondary);
 }
 
 /* button */
@@ -66,7 +72,7 @@ h6 {
   background: linear-gradient(
     90deg,
     var(--color-light-black),
-    var(--color-orange) 50% 100%
+    var(--color-red) 50% 100%
   );
   background-size: 200% 100%;
   background-position: right;
@@ -99,54 +105,43 @@ h6 {
 /* navbar */
 
 nav {
-  background-color: var(--color-light-black);
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 1%;
   height: 4rem;
   background: linear-gradient(var(--color-light-black), #38383d);
-  padding-inline: 2rem;
 }
 
 .navbar__logo {
   width: 9rem;
   margin-top: 1rem;
-  padding: 1%;
+  padding: 0.5%;
 }
 
 .nav-link {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
-  color: var(--color-orange);
+  color: var(--color-white);
 }
 
 .nav-link:hover,
 .nav-link:focus {
   color: var(--color-red);
   cursor: default;
-  border-bottom-color: rgba(255, 255, 255, 0.25);
-}
-
-.nav-link--pro {
-  color: var(--color-red);
-}
-.nav-link--pro:hover {
-  color: var(--color-orange);
 }
 
 nav ul {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  color: var(--color-orange);
 }
 
 #icons {
   cursor: pointer;
   display: none;
-  color: var(--color-orange);
+  color: var(--color-red);
   font-size: 2rem;
 }
 
@@ -157,11 +152,14 @@ nav ul {
   #icons:before {
     content: "\2630";
   }
+  .active #icons::before {
+    content: "\2715";
+  }
 
   nav ul {
     position: fixed;
     left: -100%;
-    top: 6%;
+    top: 7%;
     flex-direction: column;
     background: linear-gradient(var(--color-light-black), #38383d);
     width: 100%;
@@ -181,54 +179,39 @@ nav ul {
   }
 }
 
-.nav-link li {
-  color: var(--color-orange);
-}
-.nav-link li:hover {
-  color: var(--color-red);
-}
-/* navbar admin */
-
-.navbar__admin a {
-  color: var(--color-orange) !important;
-}
-.navbar__admin a:hover {
-  color: var(--color-red) !important;
-}
 /*
   MAIN
   */
 
 /* section hero */
+
 .hero {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: end;
+  align-items: center;
   row-gap: 2px;
+  padding: 1%;
 }
 
 .hero__bg {
-  background-image: url(/assets/images/home-bg-test.jpg) !important;
+  background-image: url(/assets/images/bg-parrot.jpg) !important;
   background: no-repeat;
   background-size: cover;
   background-position: center;
   object-fit: fill !important;
-  background-color: rgba(24, 23, 23, 0.5);
+  background-color: rgba(24, 23, 23, 0.5) !important;
   height: 100vh;
-  min-height: 100vh;
+  min-height: 100vh !important;
 }
 
 .hero__description {
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-  text-align: center;
   width: 100%;
-  padding: 1rem;
 }
 
 .hero__title {
-  color: var(--color-white);
   font-size: 3.2rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -236,7 +219,6 @@ nav ul {
 }
 
 .hero__text {
-  color: var(--color-orange);
   font-size: 2.2rem;
 }
 
@@ -244,26 +226,18 @@ nav ul {
   width: 100%;
 }
 
-.hero__description p:last-child {
-  font-size: 2rem;
-  color: var(--color-orange);
-  text-transform: uppercase;
-}
-.hero__description p:last-child:hover {
-  font-weight: 700;
-  color: var(--color-white);
-  text-transform: uppercase;
-}
-
-/* section prestation */
-.prestations {
+/* section prestations  */
+.prestations,
+.annonces {
   padding: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .prestations__title {
-  color: var(--color-orange);
-  padding: 2%;
-  margin-top: 3rem;
   font-size: 3rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -277,24 +251,24 @@ nav ul {
   width: 100%;
 }
 .prestation__title {
-  color: var(--color-orange);
-  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-size: 1.8rem;
   font-weight: 600;
 }
 .prestation__description {
   color: var(--color-white);
-  font-weight: 500;
 }
 
 /* section annonces */
 
+.annonces {
+  text-align: justify;
+}
+
 .annonces__titles {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  color: var(--color-orange);
-  padding: 2%;
-  margin-top: 3rem;
   font-size: 2rem;
 }
 
@@ -315,26 +289,22 @@ nav ul {
   width: 100%;
 }
 
-.card__img {
-  width: 100%;
-}
-
 .annonces__card {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background-color: var(--color-light-black);
-  color: var(--color-white);
   background: linear-gradient(var(--color-light-black), #38383d);
   border-radius: 20px 20px;
 }
 
 .card__title {
-  color: var(--color-orange);
   font-size: 1.5rem;
   font-weight: 600;
+  margin-top: 1%;
 }
-/* .card__description {
-  padding: 1%;
-} */
+
+.card__description {
+  padding: 2%;
+}
 
 .card__price {
   font-weight: 700;
@@ -346,7 +316,6 @@ nav ul {
 
 .footer {
   margin-top: 10%;
-  padding-top: 2%;
-  color: var(--color-white);
+  padding: 2%;
   background: linear-gradient(var(--color-light-black), #38383d);
 }

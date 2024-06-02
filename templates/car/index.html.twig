@@ -8,30 +8,58 @@
 	<!--Section: Annonces -->
 	<section class="container annonces">
 
-		<h1 class="mt-4 py-2 prestations__title text-center">Nos véhicules d'occasions</h1>
-		<hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-
-		<h2 class="mt-4">Filtrer les annonces</h2>
-		<div class="row g-0">
+		<h1 class="prestations__title">Nos véhicules d'occasions</h1>
+		<p class="mb-5 text-center">
+			Une large gamme de véhicules.
+		</p>
+		<hr class="w-25 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+		<div class="row g-0 justify-content-md-center">
 			<div class="col-md-4">
-				<h6>Par transmission :</h6>
-				{% for gearbox in gearboxes %}
-					<a href="{{path('car_gearbox', {'id': gearbox.id} )}}" class=" btn btn-light btn-sm ms-1 " id="js-filter">
-						{{gearbox.name}}
+				<h5>Boite de vitesse</h5>
+				<div class="dropdown show">
+					<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Selectionnez une boite de vitesse
 					</a>
-				{% endfor %}
+
+					<div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+						{% for gearbox in gearboxes %}
+							<a class="dropdown-item" href="{{path('car_gearbox', {'id': gearbox.id} )}}" id="js-filter">{{gearbox.name}}</a>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
-			<div class="col-md-6">
-				<h6>Par energie :</h6>
-				{% for energy in energys %}
-					<a href="{{ path('car_energy', {'id': energy.id} )}}" class="btn btn-light btn-sm ms-1" id="js-filter">
-						{{energy.name}}
+			<div class="col-md-3">
+				<h5>Energie</h5>
+				<div class="dropdown show">
+					<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Selectionnez l'energie
 					</a>
-				{% endfor %}
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						{% for energy in energys %}
+							<a class="dropdown-item" href="{{path('car_energy', {'id': energy.id} )}}" id="js-filter">{{energy.name}}</a>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
+
+			<div class="col-md-3">
+				<h5>Marque</h5>
+				<div class="dropdown show">
+					<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Selectionnez la marque
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						{% for car in cars %}
+							<a class="dropdown-item" href="{{path('car_model', {'id': car.model.id} )}}" id="js-filter">{{car.model.brand.name}}</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
 			<div class="col-md-2">
-				<h6>Supprimer les filtres:</h6>
-				<a href="{{ path('cars_all') }}" class="btn btn-danger btn-sm">Réinitialiser</a>
+				<h5>Revenir à la liste</h5>
+				<a href="{{ path('car_all') }}" class=" dropdown-item">Réinitialiser</a>
 			</div>
 
 		</div>
@@ -41,12 +69,10 @@
 			{% include "car/_carCard.html.twig" %}
 		</div>
 
-
 	</section>
 	<!-- End Section: Annonces -->
 {% endblock %}
 
 {% block javascripts %}
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="{{ asset('assets/js/filters.js') }}"></script>
 {% endblock %}

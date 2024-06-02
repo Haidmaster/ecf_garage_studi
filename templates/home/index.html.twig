@@ -14,7 +14,7 @@
 				L'automobile au service du client depuis plus de 15 ans.
 			</p>
 			<div class="hero__action">
-				<a href="#prestations" class="button button-orange">En savoir plus</a>
+				<a href="#prestations" class="button button-red ">En savoir plus</a>
 			</div>
 		</div>
 	</section>
@@ -23,20 +23,20 @@
 	{# START: section arrivages #}
 	<section class="annonces" id="{{path('car_index')}}">
 		<div class="container">
-			<div class="annonces__titles">
-				<h2 class="annonces__title">Nouveaux véhicules en stock</h2>
-				<p>
-					<a href="{{path('car_index')}}">
-						Voir toutes nos annonce
-						<span>
-							<i class="fa fa-angle-right"></i>
-						</span>
-					</a>
+			<div class="text-center">
+				<h2 class="mb-4">Nouveaux véhicules en stock</h2>
+				<p class="mb-5 text-center">
+					Une large gamme de véhicules.
 				</p>
-			</div>
+				<hr class="w-25 mx-auto mb-5 mb-xl-9 border-dark-subtle">
 
-			<div class="row annonces__cards mb-4">
-				{% include "car/_carCard.html.twig" %}
+				<div class="row annonces__cards mb-4">
+					{% include "car/_carCard.html.twig" %}
+				</div>
+
+				<p class="mt-4">
+					<a href="{{path('car_index')}}" class="button button-red w-25 ">Voir toutes nos annonces</a>
+				</p>
 			</div>
 		</div>
 	</section>
@@ -47,22 +47,24 @@
 
 	<section class="prestations" id="prestations">
 		<div class="container">
-			<h2 class="mb-4 mt-4 prestations__title text-center">Nos prestations</h2>
-			<p class="mb-5 text-center">
-				Toutes nos prestations pour satisfaire nos clients.
-			</p>
-			<hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-			<div class="row">
-				{% for prestation in prestations %}
-					{% include "prestation/index.html.twig" %}
-				{% endfor %}
+			<div class="row justify-content-md-center">
+				<h2 class="mb-4 mt-4 prestations__title ">Nos prestations</h2>
+				<p class="mb-5 text-center">
+					Toutes nos prestations pour satisfaire nos clients.
+				</p>
+				<hr class="w-25 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+				<div class="row mt-4">
+					{% for service in services %}
+						{% include "service/index.html.twig" %}
+					{% endfor %}
+				</div>
 			</div>
 		</div>
 	</section>
-
 	{# END: section prestations #}
 
 	{# START: section contact #}
+
 	<div class="container">
 		{% include "partials/_contactForm.html.twig" %}
 	</div>
