@@ -6,9 +6,13 @@
 {% block content %}
 
 	<div class="container">
-		<h1>Modifier une annonce</h1>
-		{% include "admin/car/_form.html.twig" %}
-		<a href="{{path('car_index')}}" class="button button-orange btn">Revenir à la liste</a>
+		<div class="row justify-content-center mt-4 py-2">
+			<div class="col-md-6">
+				<h1 class="mt-4">Modifier une annonce</h1>
+				{% include "admin/car/_form.html.twig" %}
+				<a href="{{path('car_index')}}">Revenir à la liste</a>
+			</div>
+		</div>
 	</div>
 
 {% endblock %}

@@ -47,7 +47,7 @@ class UserType extends AbstractType
                 'entry_options' => [
                     'choices' => [
                         [
-                            'Aministrateur' => 'ROLE_ADMIN',
+                            'Administrateur' => 'ROLE_ADMIN',
                             'Employé' => 'ROLE_EMPLOYEE'
                         ]
 

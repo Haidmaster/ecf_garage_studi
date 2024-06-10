@@ -62,7 +62,7 @@ class ModelCrudController extends AbstractController
         ]);
     }
 
-    #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
+    #[Route('/suppression/{id}', name: 'delete', methods: ['POST', 'GET'], requirements: ['id' => "\d+"],)]
     public function delete(Model $model, ModelRepository $repo, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete' . $model->getId(), $request->request->get('_token'))) {
@@ -70,7 +70,5 @@ class ModelCrudController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_model_index', [], Response::HTTP_SEE_OTHER);
-        // $repo->remove($model, true);
-        // return $this->redirectToRoute('admin_model_index');
     }
 }

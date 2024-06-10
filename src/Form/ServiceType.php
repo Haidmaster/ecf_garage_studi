@@ -23,8 +23,8 @@ class ServiceType extends AbstractType
 
             ])
             ->add('name', TextType::class, [
-                'label' => 'Titre de la service',
-                'attr' =>  ['placeholder' => 'Saisir le titre de la service']
+                'label' => 'Titre de la prestation',
+                'attr' =>  ['placeholder' => 'Saisir le titre de la prestation']
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Description',

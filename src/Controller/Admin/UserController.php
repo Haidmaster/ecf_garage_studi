@@ -24,7 +24,7 @@ class UserController extends AbstractController
     /user/{id}/delete       : supprimer un user
 */
 
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(UserRepository $repo): Response
     {
         return $this->render('admin/user/index.html.twig', [
@@ -32,7 +32,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/creation', name: 'create')]
+    #[Route(path: '/creation', name: 'create', methods: ['POST', 'GET'])]
     public function new(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
@@ -50,7 +50,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/edition/{id}/', name: 'edit')]
+    #[Route('/edition/{id}/', name: 'edit', requirements: ['id' => "\d+"], methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
         $user = $em->find(User::class, $request->get('id'));
@@ -65,7 +65,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'delete')]
+    #[Route('/delete/{id}', name: 'delete', requirements: ['id' => "\d+"], methods: ['GET', 'POST'])]
     public function delete(Request $request, user $user, UserRepository $repo)
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
