@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ModelRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -33,11 +32,9 @@ class Model
         pattern: '/^[0-9-a-zA-Z\s-]+$/',
         message: 'Le modèle ne peut contenir que des lettres et des chiffres'
     )]
-    #[Groups(['getCars'])]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'models')]
-    #[Groups(['getCars'])]
     private ?Brand $brand = null;
 
     #[ORM\OneToMany(mappedBy: 'model', targetEntity: Car::class)]

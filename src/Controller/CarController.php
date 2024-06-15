@@ -20,7 +20,6 @@ class CarController extends AbstractController
         CarRepository $carRepo,
         GearboxRepository $gearboxRepo,
         EnergyRepository $energyRepo,
-        Request $request
     ): Response {
 
         $cars = $carRepo->findAll();

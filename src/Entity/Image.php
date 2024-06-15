@@ -18,7 +18,6 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['getCars'])]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]

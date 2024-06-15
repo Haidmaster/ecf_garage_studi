@@ -9,7 +9,6 @@ use App\Repository\CarRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
@@ -20,17 +19,14 @@ class Car
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['getCars'])]
     #[Assert\Positive]
     private ?int $mileage = null;
 
     #[ORM\Column]
-    #[Groups(['getCars'])]
     #[Assert\Positive]
     private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['getCars'])]
     #[Assert\Positive]
     #[Assert\Length(
         min: 12,
@@ -45,7 +41,6 @@ class Car
     private ?string $options = null;
 
     #[ORM\Column]
-    #[Groups(['getCars'])]
     #[Assert\Length(
         min: 4,
         minMessage: "Le contenu doit faire au moins {{ limit }} caractères",
@@ -68,19 +63,15 @@ class Car
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['getCars'])]
     private ?Model $model = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
-    #[Groups(['getCars'])]
     private ?Gearbox $gearbox = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
-    #[Groups(['getCars'])]
     private ?Energy $energy = null;
 
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
-    #[Groups(['getCars'])]
     private Collection $images;
 
     public function __construct()

@@ -18,7 +18,6 @@ class Energy
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]
-    #[Groups(['getCars'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'energy', targetEntity: Car::class)]

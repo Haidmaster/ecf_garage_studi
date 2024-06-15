@@ -59,6 +59,12 @@ li {
   font-family: var(--font-secondary);
 }
 
+/* login eye */
+
+.input-group-text {
+  cursor: pointer;
+}
+
 /* button */
 
 .button {
