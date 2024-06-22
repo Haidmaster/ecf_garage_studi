@@ -51,7 +51,7 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						{% for car in cars %}
-							<a class="dropdown-item" href="{{path('car_model', {'id': car.model.id} )}}" id="js-filter">{{car.model.brand.name}}</a>
+							<a class="dropdown-item" href="{{path('car_brand', {'id': car.model.brand.id} )}}" id="js-filter">{{car.model.brand.name}}</a>
 						{% endfor %}
 					</div>
 				</div>

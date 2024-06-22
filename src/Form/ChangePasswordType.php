@@ -17,7 +17,7 @@ class ChangePasswordType extends AbstractType
         $builder
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'mapped' => false,
+                'mapped' => true,
                 'invalid_message' => 'Le mot de passe ne correspond pas.',
                 'label' => 'Votre nouveau mot de passe',
 

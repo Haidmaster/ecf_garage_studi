@@ -6,6 +6,7 @@ use App\Repository\BrandRepository;
 use App\Repository\CarRepository;
 use App\Repository\EnergyRepository;
 use App\Repository\GearboxRepository;
+use App\Repository\ModelRepository;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,31 +91,31 @@ class CarFiltersController extends AbstractController
         return $this->render("car/_carCard.html.twig", compact('cars', 'gearboxes', 'energys'));
     }
 
-    #[Route('/api/annonces/modele/{id}', name: 'car_model', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function getCarBrand(
+    #[Route('/api/annonces/marque/{id}', name: 'car_brand', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function findByBrand(
         int $id,
-        CarRepository $carRepo,
+        ModelRepository $modelRepo,
         GearboxRepository $gearboxRepo,
         EnergyRepository $energyRepo,
         BrandRepository $brandRepo,
         Request $request
     ): Response {
 
-        // filtre par modèle       
-        $car = $carRepo->findByModel($id);
+        // filtre par marque     
+        $models = $modelRepo->findByBrand($id);
         $gearboxes = $gearboxRepo->findAll();
         $energys = $energyRepo->findAll();
-        $brands = $brandRepo->findAll($id);
+        $brands = $brandRepo->findAll();
 
         // Check if ajax request
         if ($request->get('ajax')) {
             return new JsonResponse([
                 "content" => $this->renderView(
                     'car/_carCard.html.twig',
-                    compact('cars', 'car')
+                    compact('models')
                 )
             ]);
         }
-        return $this->render("car/_carCard.html.twig", compact('car', 'gearboxes', 'energys', 'brands'));
+        return $this->render("car/_carCard.html.twig", compact('models', 'gearboxes', 'energys', 'brands'));
     }
 }
