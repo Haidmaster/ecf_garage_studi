@@ -40,18 +40,20 @@ class CarRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByModel($modelId = null): array
+
+    public function findByBrand($brandId = null): array
     {
         $queryBuilder = $this->createQueryBuilder('c')
-            ->leftJoin('c.model', 'm');
+            ->leftJoin('c.model', 'm')
+            ->leftJoin('m.brand', 'b');
 
-        if ($modelId !== null) {
-            $queryBuilder->where('m.id = :modelId')
-                ->setParameter('modelId', $modelId);
+        if ($brandId !== null) {
+            $queryBuilder->where('b.id = :brandId')
+                ->setParameter('brandId', $brandId);
         }
-
         return $queryBuilder->getQuery()->getResult();
     }
+
     public function findByGearbox($gearboxId = null): array
     {
         $queryBuilder = $this->createQueryBuilder('c')

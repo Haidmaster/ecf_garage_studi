@@ -16,6 +16,6 @@ class PagesController extends AbstractController
     #[Route('/cgu', name: 'page_cgu')]
     public function cgu(): Response
     {
-        return $this->render('cgu/cgu.html.twig');
+        return $this->render('pages/cgu.html.twig');
     }
 }
