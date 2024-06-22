@@ -58,10 +58,9 @@ class CarCrudController extends AbstractController
     }
 
     #[Route('/edition/{id}', name: 'edit', requirements: ['id' => "\d+"], methods: ['GET', 'POST'])]
-    public function edit(Car $car, Request $request, CarRepository $repo, SessionInterface $session,): Response
+    public function edit(Car $car, Request $request, CarRepository $repo): Response
     {
 
-        $session->set('previous_url', $request->getUri());
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
 
@@ -75,16 +74,15 @@ class CarCrudController extends AbstractController
         ]);
     }
 
-    #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"],)]
-    public function delete(Car $car, CarRepository $repo): Response
+    #[Route('/suppression/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => "\d+"])]
+    public function delete(Car $car, CarRepository $repo, Request $request): Response
     {
 
-        $repo->remove($car, true);
-
+        if ($this->isCsrfTokenValid('delete' . $car->getId(), $request->request->get('_token'))) {
+            $repo->remove($car, true);
+        }
 
         return $this->redirectToRoute('car_index', [], Response::HTTP_SEE_OTHER);
         $this->addFlash('success', 'Utilisateur supprimé avec succès');
     }
-    // $repo->remove($car, true);
-    // return $this->redirectToRoute('car_index');
 }

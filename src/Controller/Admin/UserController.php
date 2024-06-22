@@ -50,7 +50,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/edition/{id}/', name: 'edit', requirements: ['id' => "\d+"], methods: ['GET', 'POST'])]
+    #[Route('/edition/{id}/', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
         $user = $em->find(User::class, $request->get('id'));
@@ -65,7 +65,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'delete', requirements: ['id' => "\d+"], methods: ['GET', 'POST'])]
+    #[Route('/supression/{id}', name: 'delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, user $user, UserRepository $repo)
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {

@@ -61,7 +61,7 @@ class BrandCrudController extends AbstractController
         ]);
     }
 
-    #[Route('/suppression/{id}', name: 'delete', methods: ['GET'], requirements: ['id' => "\d+"],)]
+    #[Route('/suppression/{id}', name: 'delete', methods: ['GET'], requirements: ['id' => "\d+"])]
     public function delete(Brand $brand, BrandRepository $repo): Response
     {
 
