@@ -62,10 +62,15 @@ class BrandCrudController extends AbstractController
     }
 
     #[Route('/suppression/{id}', name: 'delete', methods: ['GET'], requirements: ['id' => "\d+"])]
-    public function delete(Brand $brand, BrandRepository $repo): Response
+    public function delete(Brand $brand, BrandRepository $repo, Request $request): Response
     {
 
-        $repo->remove($brand, true);
-        return $this->redirectToRoute('admin_brand_index');
+
+
+        if ($this->isCsrfTokenValid('delete' . $brand->getId(), $request->request->get('_token'))) {
+            $repo->remove($brand, true);
+        }
+
+        return $this->redirectToRoute('admin_brand_index', [], Response::HTTP_SEE_OTHER);
     }
 }

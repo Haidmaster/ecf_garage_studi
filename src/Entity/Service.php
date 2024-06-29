@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Image;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ServiceRepository;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
@@ -17,6 +18,17 @@ class Service
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Veuillez saisir une prestation")]
+    #[Assert\Length(
+        min: 10,
+        minMessage: "Le titre ne doit contenir au minimum {{ limit }} caractères",
+        max: 32,
+        maxMessage: "Le titre ne peut pas dépasser {{ limit }} caractères"
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s-]+$/',
+        message: 'Le titre ne peut contenir que des lettres'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]

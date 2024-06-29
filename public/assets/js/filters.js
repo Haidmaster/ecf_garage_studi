@@ -3,8 +3,9 @@ function onClickBtnFilter(event) {
   const Url = this.href;
 
   fetch(Url + "?" + "&ajax=1", {
+    method: "GET",
     headers: {
-      "X-Requested-With": "XMLHttpRequest",
+      Accept: "application/json",
     },
   })
     .then((response) => response.json())

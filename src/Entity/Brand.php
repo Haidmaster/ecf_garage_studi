@@ -7,8 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BrandRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-
-use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -22,7 +20,6 @@ class Brand
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]
-    #[Groups(['getCars'])]
     #[Assert\NotBlank(message: "Veuillez saisir une marque")]
     #[Assert\Length(
         min: 2,
@@ -32,7 +29,7 @@ class Brand
     )]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z\s-]+$/',
-        message: 'La marque ne peut contenir que des lettres et des chiffres'
+        message: 'La marque ne peut contenir que des lettres'
     )]
     private ?string $name = null;
 

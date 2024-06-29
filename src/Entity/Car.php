@@ -20,10 +20,30 @@ class Car
 
     #[ORM\Column]
     #[Assert\Positive]
+    #[Assert\Length(
+        min: 5,
+        minMessage: "Le contenu doit contenir au moins {{ limit }} caractères",
+        max: 12,
+        maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/',
+        message: 'Seuls les chiffres sont autorisés'
+    )]
     private ?int $mileage = null;
 
     #[ORM\Column]
     #[Assert\Positive]
+    #[Assert\Length(
+        min: 5,
+        minMessage: "Le contenu doit contenir au moins {{ limit }} caractères",
+        max: 12,
+        maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/',
+        message: 'Seuls les chiffres sont autorisés'
+    )]
     private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -31,33 +51,27 @@ class Car
     #[Assert\Length(
         min: 12,
         minMessage: "Le contenu doit contenir au moins {{ limit }} caractères",
-        max: 256,
+        max: 400,
         maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
     )]
-    // #[Assert\Regex(
-    //     pattern: '/^[a-zA-Z\s-]+$/',
-    //     message: 'Seuls les chiffres et les lettres sont autorisés'
-    // )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s-]+$/',
+        message: 'Seuls les chiffres et les lettres sont autorisés'
+    )]
     private ?string $options = null;
 
     #[ORM\Column]
-    #[Assert\Length(
-        min: 4,
-        minMessage: "Le contenu doit faire au moins {{ limit }} caractères",
-        max: 4,
-        maxMessage: "Le contenu de ne peut pas dépasser {{ limit }} caractères"
-    )]
     #[Assert\Positive]
     #[Assert\NotBlank(message: 'ce champ ne peut pas être vide')]
     #[Assert\Length(
         min: 4,
         max: 4,
         minMessage: 'L\'année doit faire au moins {{ limit }} caractères',
-        maxMessage: 'L\' titre ne doit pas faire plus de {{ limit }} caractères'
+        maxMessage: 'L\' année ne doit pas faire plus de {{ limit }} caractères'
     )]
     #[Assert\Regex(
         pattern: '/^[0-9]+$/',
-        message: 'L\'année ne peut contenir qu\'un chiffre'
+        message: 'L\'année ne peut contenir que des chiffres'
     )]
     private ?int $years = null;
 
